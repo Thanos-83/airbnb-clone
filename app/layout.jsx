@@ -1,4 +1,4 @@
-import { Inter } from 'next/font/google';
+// import { Inter } from 'next/font/google';
 import './globals.css';
 import { AuthProvider } from '@/lib/AuthProvider';
 import Navbar from '../components/Navbar/Navbar';
@@ -6,7 +6,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from './api/auth/[...nextauth]/route';
 import { Toaster } from '@/components/ui/sonner';
 import 'mapbox-gl/dist/mapbox-gl.css';
-const inter = Inter({ subsets: ['latin'] });
+// const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'Airbnb Clone',
