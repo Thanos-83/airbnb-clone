@@ -26,6 +26,8 @@ export function WishlistsDialog({ info, wishlists }) {
     // console.log(wishlist);
     const data = { wishlistID: wishlist._id, favouriteInfo: info };
     const response = await addFavouriteToWishlist(data);
+
+    console.log('Response from add favourite: ', response);
     toast.custom(
       (t) => (
         <div className='z-[999] border-gray-200 border pointer-events-auto w-[340px] flex items-center gap-3 p-4 rounded-lg shadow-md'>
@@ -59,7 +61,7 @@ export function WishlistsDialog({ info, wishlists }) {
       <DialogContent className='sm:max-w-[640px] p-0'>
         <DialogHeader asChild>
           <h2 className='p-4 text-xl text-center text-[#222222] font-[600]'>
-            Add to Wishlist {info.id}{' '}
+            Add to Wishlist
           </h2>
         </DialogHeader>
         <hr className='h-[2px] bg-slate-100' />
