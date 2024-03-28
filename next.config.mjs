@@ -1,9 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   env: {},
-  experimental: {
-    serverActions: true,
-  },
+
   images: {
     remotePatterns: [
       {
