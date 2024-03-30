@@ -9,15 +9,16 @@ import { WishlistSettings } from '@/components/wishlist/WishlistSettings';
 
 function TopBar({ wishlistInfo }) {
   const router = useRouter();
-  const [headerHeight, setHeaderHeight] = useState();
+  const [headerHeight, setHeaderHeight] = useState(0);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const h = document.querySelector('header').clientHeight;
     setHeaderHeight(h + 2);
   }, []);
+  console.log('Header Height: ', headerHeight);
   return (
     <div
-      className={`topBar flex-1 sticky top-[${headerHeight}px] flex items-center justify-between py-4 bg-white z-10`}>
+      className={`topBar flex-1 sticky top-[97px] flex items-center justify-between py-4 bg-white z-20`}>
       <button
         onClick={() => router.back()}
         className='rounded-full hover:bg-black hover:bg-opacity-5 p-3'>

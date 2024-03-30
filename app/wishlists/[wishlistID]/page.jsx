@@ -17,8 +17,8 @@ async function SingleWishlist({ params }) {
 
   const { wishlist } = await fetchSingleWishlist(params.wishlistID);
   return (
-    <main className='flex gap-8 items-start max-w-[1920px] mx-auto px-8'>
-      <section className='w-full md:w-[60%] pb-12'>
+    <main className='flex gap-8 items-start'>
+      <section className='w-full md:w-[60%] 3xl:w-1/2  pl-8 pb-12'>
         <TopBar wishlistInfo={wishlist} />
         <h1 className='mb-8 text-3xl font-semibold text-[#222222]'>
           {wishlist.wishlistName}
@@ -35,7 +35,7 @@ async function SingleWishlist({ params }) {
           ))}
         </div>
       </section>
-      <section className='w-[40%] h-screen sticky top-0'>
+      <section className='hidden md:block md:w-[40%] 3xl:w-1/2 h-[calc(100vh-96px)] sticky top-[96px]'>
         <MapBox rooms={wishlist.rooms} />
       </section>
     </main>

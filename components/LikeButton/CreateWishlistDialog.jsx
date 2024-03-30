@@ -58,7 +58,7 @@ export function CreateWishlistDialog({ setWishlistsOpen, asButton, info }) {
         <DialogContent className='sm:max-w-[640px] p-0'>
           <DialogHeader asChild>
             <h2 className='p-4 text-xl text-center text-[#222222] font-[600]'>
-              Create Wishlist : {info.id}
+              Create Wishlist : House ID {info.id}
             </h2>
           </DialogHeader>
           <hr className='h-[2px] bg-slate-100' />

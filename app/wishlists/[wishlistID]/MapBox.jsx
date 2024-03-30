@@ -11,9 +11,9 @@ function MapBox({ rooms }) {
   }));
 
   const center = getCenter(coordinates);
-  console.log('Rooms: ', rooms);
-  console.log('Coordinates: ', coordinates);
-  console.log('Center: ', center);
+  // console.log('Rooms: ', rooms);
+  // console.log('Coordinates: ', coordinates);
+  // console.log('Center: ', center);
 
   const [viewState, setViewState] = useState({
     longitude: center.longitude,
