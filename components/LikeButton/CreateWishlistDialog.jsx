@@ -14,8 +14,9 @@ import LikeButton from './LikeButton';
 import { useForm } from 'react-hook-form';
 import { handleWishlistAction } from '@/app/_actions/actions';
 import { toast } from 'sonner';
+import { usePathname } from 'next/navigation';
 
-export function CreateWishlistDialog({ setWishlistsOpen, asButton, info }) {
+export function CreateWishlistDialog({ asButton, favouriteInfo }) {
   const {
     register,
     handleSubmit,
@@ -25,21 +26,25 @@ export function CreateWishlistDialog({ setWishlistsOpen, asButton, info }) {
   } = useForm();
   const [open, setOpen] = useState(false);
   const [nameLength, setNameLength] = useState(0);
+  const pathname = usePathname();
   const handleToogleModal = () => {
     setOpen(!open);
   };
 
   const handleWishlist = async (data) => {
     console.log('Data: ', data);
-    const response = await handleWishlistAction(data);
+    const wishlistInfo = { wishlistName: data.name, favouriteInfo };
+    const response = await handleWishlistAction(wishlistInfo);
     console.log('Response from server action: ', response);
     reset();
     setOpen(false);
-    setWishlistsOpen(false);
-    toast.success(`Event has been created`, {
+    // setWishlistsOpen(false);
+    toast.success(`Wishlist has been created`, {
       position: 'bottom-left',
     });
   };
+
+  // console.log('Create wishlist dialog: ', favouriteInfo);
 
   return (
     <>
@@ -52,13 +57,13 @@ export function CreateWishlistDialog({ setWishlistsOpen, asButton, info }) {
               Create new wishlist
             </Button>
           ) : (
-            <LikeButton setOpen={setOpen} />
+            <LikeButton setOpen={setOpen} favourite={false} />
           )}
         </DialogTrigger>
         <DialogContent className='sm:max-w-[640px] p-0'>
           <DialogHeader asChild>
             <h2 className='p-4 text-xl text-center text-[#222222] font-[600]'>
-              Create Wishlist : House ID {info.id}
+              Create Wishlist : House ID
             </h2>
           </DialogHeader>
           <hr className='h-[2px] bg-slate-100' />
@@ -81,14 +86,7 @@ export function CreateWishlistDialog({ setWishlistsOpen, asButton, info }) {
                   id='name'
                   onChange={(e) => setNameLength(e.target.value.length)}
                 />
-                <input
-                  type='hidden'
-                  name='roomID'
-                  id='roomID'
-                  hidden
-                  value={info.id}
-                  {...register('roomID')}
-                />
+
                 <div className='mt-3 flex items-center justify-between'>
                   <p className=' text-md text-muted-foreground'>
                     {nameLength}/50 characters

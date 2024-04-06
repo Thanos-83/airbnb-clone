@@ -3,11 +3,12 @@
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../api/auth/[...nextauth]/route';
 import Wishlist from '@/Models/Wishlists';
-import Favourite from '@/Models/Wishlists';
+import User from '@/Models/User';
 import connectdb from '@/database/db';
-import { revalidateTag } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import clientPromise from '@/database/mongoClient';
 import { NextResponse } from 'next/server';
+import Listing from '@/Models/Listing';
 
 export const fetchWishlists = async () => {
   const session = await getServerSession(authOptions);
@@ -22,7 +23,10 @@ export const fetchWishlists = async () => {
     }
     // revalidatePath('/');
     revalidateTag('wishlists');
-    return { message: 'success', wishlists };
+    return {
+      message: 'success',
+      wishlists: JSON.parse(JSON.stringify(wishlists)),
+    };
   } catch (error) {
     return { message: 'fail', error };
   }
@@ -30,50 +34,49 @@ export const fetchWishlists = async () => {
 
 export const handleWishlistAction = async (data) => {
   const session = await getServerSession(authOptions);
-
-  // we fetch the data of the specific room
-  const client = await clientPromise;
-  const db = client.db('sample_airbnb');
-  const house = await db
-    .collection('listingsAndReviews')
-    .find({ _id: data.roomID })
-    .toArray();
+  connectdb();
+  // console.log('Create wishlist inside server action: ', data);
 
   // we construct the info of the room we will save to wishlist
-  const roomInfo = {
-    id: house[0]._id,
-    image: house[0].images.picture_url,
-    name: house[0].name,
-    price: parseFloat(house[0].price.toString()),
-    coordinates: {
-      long: house[0].address.location.coordinates[0],
-      lat: house[0].address.location.coordinates[1],
-    },
-    note: '',
-    beds: house[0].beds,
-    number_of_reviews: house[0].number_of_reviews,
-  };
+  const roomInfo = { ...data.favouriteInfo, note: '' };
 
   try {
     const wishlist = {
-      wishlistName: data.name,
+      wishlistName: data.wishlistName,
       user: session.user.id,
       rooms: [roomInfo],
     };
-    // console.log('Wishlist Server Action: ', wishlist);
-    const response = await Favourite.create(wishlist);
+    const response = await Wishlist.create(wishlist);
+
+    const user = await User.findById({ _id: session.user.id });
+
+    const userFavourite = {
+      ...roomInfo,
+      wishlist_id: response._id.toString(),
+    };
+    // console.log('User favourite: ', userFavourite);
+    user.favourites.push(userFavourite);
+
+    await user.save();
     revalidateTag('wishlists');
-    return { message: 'success', createdWishlsit: JSON.stringify(response) };
+    revalidateTag('favourites');
+    revalidatePath('/wishlists');
+    return {
+      message: 'success',
+      createdWishlsit: JSON.parse(JSON.stringify(response)),
+    };
   } catch (error) {
     return { message: 'fail', error };
   }
 };
 
 export const addFavouriteToWishlist = async (data) => {
+  const session = await getServerSession(authOptions);
+
   connectdb();
   try {
     const wishlist = await Wishlist.findOne({ _id: data.wishlistID });
-    console.log('Wishlist inside the Server Action: ', wishlist);
+    // console.log('Wishlist inside the Server Action: ', wishlist);
     const newRoom = {
       id: data.favouriteInfo.id,
       image: data.favouriteInfo.image,
@@ -90,19 +93,66 @@ export const addFavouriteToWishlist = async (data) => {
     wishlist.rooms.push(newRoom);
 
     await wishlist.save();
-    console.log('Updated Single Wishlist in Server Action: ', wishlist);
+    const user = await User.findById({ _id: session.user.id });
 
+    user.favourites.push({
+      ...newRoom,
+      wishlist_id: data.wishlistID.toString(),
+    });
+
+    await user.save();
+    // console.log('Updated Single Wishlist in Server Action: ', wishlist);
+
+    revalidateTag('wishlists');
+    revalidateTag('favourites');
+    revalidatePath('wishlists');
+    return {
+      message: 'success',
+      updatedWishlist: JSON.parse(JSON.stringify(wishlist)),
+    };
+  } catch (error) {
+    return { message: 'fail', err: error };
+  }
+};
+
+export const removeFavourite = async (data) => {
+  const session = await getServerSession(authOptions);
+  // console.log('Remove favourite data: ', data);
+  try {
+    const wishlist = await Wishlist.findOne({ _id: data.wishlistID });
+
+    const updatedRooms = wishlist.rooms.filter(
+      (room) => room.id !== data.roomID
+    );
+
+    wishlist.rooms = updatedRooms;
+
+    await wishlist.save();
+    const user = await User.findById({ _id: session.user.id });
+
+    const updatedUserFavourites = user.favourites.filter(
+      (favourite) => favourite.id !== data.roomID
+    );
+
+    user.favourites = updatedUserFavourites;
+    await user.save();
+
+    revalidateTag('listings');
     revalidateTag('wishlist');
-    return { message: 'success', updatedWishlist: JSON.stringify(wishlist) };
+    revalidateTag('wishlists');
+    revalidateTag('favourites');
+    return {
+      message: 'success',
+    };
   } catch (error) {
     return { message: 'fail', err: error };
   }
 };
 
 export const deleteWishlist = async (wishlistID) => {
-  console.log(wishlistID);
+  // console.log(wishlistID);
   const response = await Wishlist.findByIdAndDelete(wishlistID);
-  console.log('Deleted Wishlist: ', response);
+  // console.log('Deleted Wishlist: ', response);
   revalidateTag('wishlists');
 };
 
@@ -121,7 +171,7 @@ export const updateWishlistName = async (data) => {
 };
 
 export const updateRoomNote = async (data) => {
-  console.log('Update Wishlist Room Data: ', data);
+  // console.log('Update Wishlist Room Data: ', data);
   try {
     const wishlist = await Wishlist.findOne({
       _id: data.wishlistID,

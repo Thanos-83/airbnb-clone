@@ -92,3 +92,12 @@ body {
 .toast {
   border-radius: var(--radius);
 }
+
+/* single room */
+
+.roomImages {
+  display: grid;
+  grid-template-rows: 220px 220px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}

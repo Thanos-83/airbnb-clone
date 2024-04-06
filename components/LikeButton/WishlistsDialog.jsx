@@ -14,13 +14,15 @@ import Image from 'next/image';
 import { toast } from 'sonner';
 import Wishlist from '../wishlist/Wishlist';
 import { addFavouriteToWishlist } from '@/app/_actions/actions';
+import { usePathname } from 'next/navigation';
 
 export function WishlistsDialog({ info, wishlists }) {
+  const pathname = usePathname();
   const [openWishlists, setWishlistsOpen] = useState(false);
   const handleToogleModal = () => {
     setWishlistsOpen(!open);
   };
-  // console.log('INFO: ', info);
+  // console.log('INFO inside Wishlists Dialog: ', info);
   const handleAddToWishlist = async (wishlist) => {
     // alert(wishlist.id);
     // console.log(wishlist);
@@ -28,12 +30,17 @@ export function WishlistsDialog({ info, wishlists }) {
     const response = await addFavouriteToWishlist(data);
 
     console.log('Response from add favourite: ', response);
+    console.log('handle Add to Wishlist: ', wishlist);
     toast.custom(
       (t) => (
         <div className='z-[999] border-gray-200 border pointer-events-auto w-[340px] flex items-center gap-3 p-4 rounded-lg shadow-md'>
           <Image
             className='rounded-lg w-[60px] aspect-square'
-            src={wishlist.rooms[0].image}
+            src={
+              response.updatedWishlist.rooms[
+                response.updatedWishlist.rooms.length - 1
+              ].image
+            }
             width={60}
             height={60}
             alt={wishlist.wishlistName}
@@ -49,14 +56,17 @@ export function WishlistsDialog({ info, wishlists }) {
           </div>
         </div>
       ),
-      { duration: 100000, position: 'bottom-left' }
+      { duration: 10000, position: 'bottom-left' }
     );
   };
 
   return (
     <Dialog open={openWishlists} onOpenChange={handleToogleModal}>
       {/* <DialogTrigger asChild> */}
-      <LikeButton setOpen={setWishlistsOpen} />
+      <LikeButton setOpen={setWishlistsOpen} favourite={false} roomID={info.id}>
+        {pathname === `/rooms/${info.id}` && 'Save'}
+      </LikeButton>
+
       {/* </DialogTrigger> */}
       <DialogContent className='sm:max-w-[640px] p-0'>
         <DialogHeader asChild>
@@ -80,7 +90,7 @@ export function WishlistsDialog({ info, wishlists }) {
           <CreateWishlistDialog
             setWishlistsOpen={setWishlistsOpen}
             asButton={true}
-            info={info}
+            favouriteInfo={info}
           />
         </div>
       </DialogContent>

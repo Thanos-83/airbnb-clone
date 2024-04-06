@@ -1,12 +1,14 @@
 // 'use client'
 import { CreateWishlistDialog } from '@/components/LikeButton/CreateWishlistDialog';
+import LikeButton from '@/components/LikeButton/LikeButton';
 import { WishlistsDialog } from '@/components/LikeButton/WishlistsDialog';
 import Image from 'next/image';
 import Link from 'next/link';
 
-async function House({ house, wishlists }) {
+async function House({ house, wishlists, isFavourite, favourite }) {
+  // console.log('Is house favourite: ', isFavourite);
   const favouriteInfo = {
-    id: house._id,
+    id: house._id.toString(),
     image: house.images.picture_url,
     name: house.name,
     price: parseFloat(house.price.toString()),
@@ -17,6 +19,8 @@ async function House({ house, wishlists }) {
     beds: house.beds,
     number_of_reviews: house.number_of_reviews,
   };
+
+  // console.log('Wishlists inside house: ', wishlists[0].rooms);
   return (
     <div>
       <div className='rounded-xl overflow-hidden aspect-square relative'>
@@ -32,13 +36,21 @@ async function House({ house, wishlists }) {
             Guest favourite
           </p>
         </Link>
-        {wishlists && wishlists.length > 0 ? (
-          <WishlistsDialog info={favouriteInfo} wishlists={wishlists} />
+        {isFavourite ? (
+          <LikeButton
+            favourite={true}
+            wishlistID={favourite.wishlist_id}
+            roomID={house._id.toString()}
+          />
+        ) : wishlists && wishlists.length > 0 ? (
+          <WishlistsDialog
+            info={favouriteInfo}
+            wishlists={JSON.parse(JSON.stringify(wishlists))}
+          />
         ) : (
           <CreateWishlistDialog
-            setWishlistsOpen={null}
             asButton={false}
-            info={favouriteInfo}
+            favouriteInfo={favouriteInfo}
           />
         )}
       </div>

@@ -7,7 +7,11 @@ function Wishlist({ wishlist }) {
       <div className='aspect-square rounded-xl  border-[10px] border-white shadow-lg overflow-hidden'>
         <Image
           className='object-cover rounded-xl h-full'
-          src={`${wishlist.rooms[wishlist.rooms.length - 1].image}`}
+          src={`${
+            wishlist.rooms.length > 0
+              ? wishlist.rooms[wishlist.rooms.length - 1].image
+              : '/images/logo.png'
+          }`}
           width={1000}
           height={1000}
           alt={wishlist.wishlistName}

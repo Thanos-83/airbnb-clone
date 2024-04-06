@@ -15,7 +15,7 @@ function TopBar({ wishlistInfo }) {
     const h = document.querySelector('header').clientHeight;
     setHeaderHeight(h + 2);
   }, []);
-  console.log('Header Height: ', headerHeight);
+  // console.log('Header Height: ', headerHeight);
   return (
     <div
       className={`topBar flex-1 sticky top-[97px] flex items-center justify-between py-4 bg-white z-20`}>

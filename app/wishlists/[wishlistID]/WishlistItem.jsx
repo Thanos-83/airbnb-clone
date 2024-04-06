@@ -5,24 +5,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { AddNoteToWishlist } from './AddNoteToWishlist';
 import { EditNote } from './EditNote';
+import LikeButton from '@/components/LikeButton/LikeButton';
 
-async function WishlistItem({ house, wishlist, roomID }) {
-  const favouriteInfo = {
-    id: house._id,
-    image: house.images,
-    name: house.name,
-    price: parseFloat(house.price.toString()),
-    coordinates: {
-      lat: house.coordinates[0],
-      long: house.coordinates[1],
-    },
-    beds: house.beds,
-    number_of_reviews: house.number_of_reviews,
-  };
+async function WishlistItem({ house, wishlist }) {
   return (
     <div>
       <div className='rounded-xl overflow-hidden aspect-square relative'>
-        <Link href={`/rooms/${house._id}`} target='_blank'>
+        <Link href={`/rooms/${house.id}`} target='_blank'>
           <Image
             src={house.image}
             width={600}
@@ -34,15 +23,11 @@ async function WishlistItem({ house, wishlist, roomID }) {
             Guest favourite
           </p>
         </Link>
-        {wishlist && wishlist.length > 0 ? (
-          <WishlistsDialog info={favouriteInfo} wishlist={wishlist} />
-        ) : (
-          <CreateWishlistDialog
-            setWishlistsOpen={null}
-            asButton={false}
-            info={favouriteInfo}
-          />
-        )}
+        <LikeButton
+          favourite={true}
+          wishlistID={wishlist._id.toString()}
+          roomID={house.id.toString()}
+        />
       </div>
       <div className='mt-4'>
         <div className='flex items-center justify-between'>
@@ -76,12 +61,16 @@ async function WishlistItem({ house, wishlist, roomID }) {
       </div>
       <div className='mt-4'>
         {house.note !== '' ? (
-          <EditNote house={house} wishlistID={wishlist._id} roomID={roomID} />
+          <EditNote
+            house={house}
+            wishlistID={wishlist._id.toString()}
+            roomID={house._id.toString()}
+          />
         ) : (
           <AddNoteToWishlist
             house={house}
-            wishlistID={wishlist._id}
-            roomID={roomID}
+            wishlistID={wishlist._id.toString()}
+            roomID={house._id.toString()}
           />
         )}
       </div>
