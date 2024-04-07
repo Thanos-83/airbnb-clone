@@ -3,6 +3,8 @@ import Listing from '@/Models/Listing';
 import connectdb from '@/database/db';
 import { revalidatePath, revalidateTag } from 'next/cache';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(req, { params }) {
   //   console.log('Params: ', params);
   connectdb();
