@@ -78,6 +78,7 @@ body {
   font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
     Helvetica Neue, sans-serif;
 }
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -100,4 +101,82 @@ body {
   grid-template-rows: 220px 220px;
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
+}
+
+/* Reviews styling*/
+
+.reviews_container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
+  gap: 3rem;
+  /* @apply sm:max-w-[1920px] sm:mx-auto sm:px-8; */
+}
+
+@media screen and (max-width: 768px) {
+  .reviews_container {
+    grid-auto-flow: column;
+    grid-auto-columns: 80%;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: inline mandatory;
+    scroll-padding-inline: 2rem;
+    grid-template-columns: unset;
+  }
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .reviews_container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ratings_container::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .reviews_container,
+  .ratings_container {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+.reviews_container > * {
+  scroll-snap-align: start;
+}
+
+@media screen and (max-width: 768px) {
+  .reviews_container > div:first-child {
+    margin-left: 2rem;
+  }
+  .reviews_container > div:last-child {
+    margin-right: 2rem;
+  }
+}
+
+.rating_container_dialog svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.communication_icon {
+  stroke-width: 2.3;
+  stroke: currentColor;
+}
+
+.reviews_dialog_reviews {
+  height: calc(80vh - 6rem - 177px);
+}
+
+.reviews_drawer_reviews {
+  height: calc(90vh - 3rem - 177px);
+}
+
+@media screen and (min-width: 1024px) {
+  .reviews_dialog_reviews,
+  .reviews_dialog_scores {
+    height: calc(80vh - 6rem);
+  }
+}
+
+.search_reviews:has(input:focus-visible) {
+  border-color: black;
 }

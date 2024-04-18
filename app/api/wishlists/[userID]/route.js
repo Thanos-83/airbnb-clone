@@ -13,7 +13,7 @@ export async function GET(req, { params }) {
       revalidateTag('wishlists');
       return NextResponse.json({ message: 'success', wishlists: [] });
     }
-    // revalidatePath('/');
+    revalidatePath('/wishlists');
     revalidateTag('wishlists');
     return NextResponse.json({ message: 'success', wishlists });
   } catch (error) {

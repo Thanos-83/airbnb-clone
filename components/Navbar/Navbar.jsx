@@ -9,8 +9,12 @@ import { usePathname } from 'next/navigation';
 
 const Navbar = ({ session }) => {
   const pathname = usePathname();
+  console.log('Pathname:: ', pathname.split('/')[1]);
   return (
-    <header className='sticky top-0 w-full bg-white z-50 border-bottom border-[#f7f7f7]'>
+    <header
+      className={`${
+        pathname.split('/')[1] !== 'rooms' && 'sticky top-0'
+      } w-full bg-white z-50 border-bottom border-[#f7f7f7]`}>
       <div className='py-4 border-b-[1px]'>
         <Container>
           <div className='flex items-center gap-3 justify-between'>

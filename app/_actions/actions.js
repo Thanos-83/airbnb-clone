@@ -10,6 +10,20 @@ import clientPromise from '@/database/mongoClient';
 import { NextResponse } from 'next/server';
 import Listing from '@/Models/Listing';
 
+export const fetchHouses = async () => {
+  try {
+    const res = await fetch(`${process.env.SITE_URL}/api/listings`, {
+      next: {
+        tags: ['wishlists', 'wishlist', 'listings'],
+      },
+    });
+    const data = await res.json();
+    return data.listings;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const fetchWishlists = async () => {
   const session = await getServerSession(authOptions);
 
@@ -136,7 +150,8 @@ export const removeFavourite = async (data) => {
 
     user.favourites = updatedUserFavourites;
     await user.save();
-
+    revalidatePath('/wishlists');
+    revalidatePath('/');
     revalidateTag('listings');
     revalidateTag('wishlist');
     revalidateTag('wishlists');
