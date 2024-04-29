@@ -22,12 +22,16 @@ import Reviews from './Reviews';
 import { ReviewsDialog } from './ReviewsDialog';
 import { ReviewsDialogMobile } from './ReviewsDialogMobile';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
+import BookingWindow from './BookingWindow';
+import { fetchReservations } from '@/app/_actions/actions';
 
 async function SingleRoom({ params }) {
   const session = await getServerSession(authOptions);
 
   const roomInfo = await fetchSingleRoom(params.roomID);
   // console.log('Single Room Info: ', roomInfo);
+
+  const reservations = await fetchReservations(params.roomID);
   const userFavourites = await fetchUserFavourites();
   const wishlists = await fetchWishlists();
   // console.log('Single Room Wishlists: ', wishlists);
@@ -161,8 +165,8 @@ async function SingleRoom({ params }) {
         </nav>
       </div>
       <Container medium={true}>
-        <div className='mt-12 mb-20 flex flex-col md:flex-row items-start gap-4'>
-          <div className='md:w-[60%]'>
+        <div className='mt-12 mb-20 flex flex-col md:flex-row items-start gap-16'>
+          <div className='w-full md:w-[60%]'>
             <h2 className='text-3xl font-semibold'>{room.room_type}</h2>
             <div className='flex items-center gap-1'>
               <p className='text-[1.25rem] font-normal'>
@@ -227,8 +231,8 @@ async function SingleRoom({ params }) {
               </div>
             </div>
           </div>
-          <div className='md:w-[40%] md:sticky md:top-[100px] border'>
-            <p>Booking info</p>
+          <div className='w-full md:w-[40%] md:sticky md:top-[100px]'>
+            <BookingWindow room={room} reservations={reservations} />
           </div>
         </div>
       </Container>

@@ -9,7 +9,7 @@ import { usePathname } from 'next/navigation';
 
 const Navbar = ({ session }) => {
   const pathname = usePathname();
-  console.log('Pathname:: ', pathname.split('/')[1]);
+  // console.log('Pathname:: ', pathname.split('/')[1]);
   return (
     <header
       className={`${
@@ -24,7 +24,7 @@ const Navbar = ({ session }) => {
           </div>
         </Container>
       </div>
-      {pathname === '/' && <Categories />}
+      {(pathname === '/' || pathname === '/search') && <Categories />}
     </header>
   );
 };

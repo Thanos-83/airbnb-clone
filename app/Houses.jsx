@@ -1,9 +1,31 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import House from './House';
+import { useInView } from 'react-intersection-observer';
+import { fetchHouses } from './_actions/actions';
+function Houses({ houses, wishlists, userFavourites }) {
+  const [listings, setListings] = useState(houses);
+  const [page, setPage] = useState(2);
+  const { ref, inView, entry } = useInView({
+    /* Optional options */
+    threshold: 0,
+  });
+  const loadMoreListings = async () => {
+    if (page > 30) return;
+    const data = await fetchHouses(page);
+    setListings((prev) => [...prev, ...data]);
+    setPage((prev) => prev + 1);
+  };
 
-function Houses({ listings, wishlists, userFavourites }) {
+  useEffect(() => {
+    if (inView) {
+      loadMoreListings();
+    }
+  }, [inView]);
+
+  // console.log('In View: ', inView);
+  // console.log('Entry: ', entry);
   return (
     <div>
       <div className='grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
@@ -30,9 +52,24 @@ function Houses({ listings, wishlists, userFavourites }) {
           />
         ))}
       </div>
-      <div>
-        <p>Loagind spinner....</p>
-      </div>
+      {page < 30 && (
+        <div className='mt-12 flex justify-center' ref={ref}>
+          <div class='lds-spinner'>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

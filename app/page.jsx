@@ -11,26 +11,13 @@ import { promises as fs } from 'fs';
 import { fetchHouses } from './_actions/actions';
 import Houses from './Houses';
 
-// const fetchHouses = async () => {
-//   try {
-//     const res = await fetch(`${process.env.SITE_URL}/api/listings`, {
-//       next: {
-//         tags: ['wishlists', 'wishlist', 'listings'],
-//         // revalidate: 1,
-//       },
-//     });
-//     const data = await res.json();
-//     return data.listings;
-//   } catch (error) {
-//     return error;
-//   }
-// };
-
-export default async function Home() {
-  const houses = await fetchHouses();
+export default async function Home({ searchParams }) {
+  const houses = await fetchHouses(1);
   const userFavourites = await fetchUserFavourites();
 
   const wishlists = await fetchWishlists();
+
+  // console.log('Search Params in Homepage: ', searchParams);
 
   // const data = await fs.readFile(process.cwd() + '/sample_airbnb.json', 'utf8');
   // const listings = await JSON.parse(data);
@@ -41,7 +28,7 @@ export default async function Home() {
       <Container>
         <div className='my-12'>
           <Houses
-            listings={houses}
+            houses={houses}
             wishlists={wishlists && wishlists.wishlists}
             userFavourites={userFavourites}
           />

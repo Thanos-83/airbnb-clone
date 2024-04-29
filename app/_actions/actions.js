@@ -3,24 +3,81 @@
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../api/auth/[...nextauth]/route';
 import Wishlist from '@/Models/Wishlists';
+import Reservation from '@/Models/Reservation';
 import User from '@/Models/User';
 import connectdb from '@/database/db';
 import { revalidatePath, revalidateTag } from 'next/cache';
 import clientPromise from '@/database/mongoClient';
 import { NextResponse } from 'next/server';
 import Listing from '@/Models/Listing';
+import { connect } from 'mongoose';
 
-export const fetchHouses = async () => {
+export const fetchHouses = async (pageParams) => {
   try {
-    const res = await fetch(`${process.env.SITE_URL}/api/listings`, {
-      next: {
-        tags: ['wishlists', 'wishlist', 'listings'],
-      },
-    });
+    console.log('Fetch Houses: ', pageParams);
+    const res = await fetch(
+      `${process.env.SITE_URL}/api/listings/${pageParams}`,
+      {
+        next: {
+          tags: ['wishlists', 'wishlist', 'listings'],
+        },
+      }
+    );
     const data = await res.json();
     return data.listings;
   } catch (error) {
     return error;
+  }
+};
+
+export const fetchSearchResults = async (pageParams, page = 1) => {
+  try {
+    console.log('Fetch Houses: ', pageParams);
+    connectdb();
+    const data = await Listing.find({
+      'address.market': pageParams.location,
+    })
+      .limit(15)
+      .skip((page - 1) * 15);
+    // console.log('Search results: ', data[1]);
+    return JSON.parse(JSON.stringify(data));
+  } catch (error) {
+    return error;
+  }
+};
+
+export const createReservation = async (info) => {
+  const session = await getServerSession(authOptions);
+  const data = { ...info, user: session.user.id };
+  connectdb();
+  try {
+    const reservation = await Reservation.create(data);
+    revalidatePath(`/rooms/${info.listing}`);
+    return { message: 'Reservation created', reservation };
+  } catch (error) {
+    return { error };
+  }
+};
+
+export const fetchReservations = async (listingID) => {
+  connectdb();
+
+  try {
+    const reservations = await Reservation.find({ listing: listingID });
+
+    if (!reservations) {
+      return {
+        message: 'Success',
+        reservations: [],
+      };
+    }
+    revalidatePath(`/rooms/${listingID}`);
+    return {
+      message: 'Success',
+      reservations,
+    };
+  } catch (error) {
+    return { message: 'Fail', error };
   }
 };
 

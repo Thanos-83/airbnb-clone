@@ -23,6 +23,7 @@ function House({ house, wishlists, isFavourite, favourite }) {
   return (
     <div>
       <div className='rounded-xl overflow-hidden aspect-square relative'>
+        {/* <p className='z-[999]'>{house._id}</p> */}
         <Link href={`/rooms/${house._id}`} target='_blank'>
           <Image
             src={house.images.picture_url}
@@ -73,11 +74,14 @@ function House({ house, wishlists, isFavourite, favourite }) {
               />
             </svg>
             {house.number_of_reviews > 0 ? (
-              Number(
-                (house.review_scores.review_scores_rating / 2) * 0.1
-              ).toFixed(2)
+              <span>
+                {house.review_scores &&
+                  Number(
+                    (house.review_scores.review_scores_rating / 2) * 0.1
+                  ).toFixed(2)}
+              </span>
             ) : (
-              <p className='font-semibold text-[1.25rem]'>New</p>
+              <span className='font-semibold text-[1.25rem]'>New</span>
             )}
           </p>
         </div>
