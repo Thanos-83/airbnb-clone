@@ -24,18 +24,19 @@ export default async function RootLayout({
     <html lang='en'>
       <body>
         <AuthProvider>
-          <Navbar session={session} />
-          {/* <div> */}
-          {children}
-          {/* {registerModal} */}
-          {/* {loginModal} */}
-
           {!session?.user && (
             <>
               {registerModal}
               {loginModal}
             </>
           )}
+          <Navbar session={session} />
+          {/* <div> */}
+
+          {children}
+          {/* {registerModal} */}
+          {/* {loginModal} */}
+
           {/* </div> */}
           <Toaster richColors />
         </AuthProvider>

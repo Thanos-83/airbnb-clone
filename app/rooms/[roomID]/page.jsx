@@ -61,18 +61,20 @@ async function SingleRoom({ params }) {
               <PiUploadSimpleBold className='h-6 w-6' />
               Share
             </button>
-            <FavouriteButton
-              favourite={
-                userFavourites
-                  ? userFavourites.favourites.find(
-                      (favourite) => favourite.id === params.roomID
-                    )
-                  : null
-              }
-              roomID={params.roomID}
-              wishlists={wishlists ? wishlists.wishlists : []}
-              favouriteInfo={favouriteInfo}
-            />
+            {session && (
+              <FavouriteButton
+                favourite={
+                  userFavourites
+                    ? userFavourites.favourites.find(
+                        (favourite) => favourite.id === params.roomID
+                      )
+                    : null
+                }
+                roomID={params.roomID}
+                wishlists={wishlists ? wishlists.wishlists : []}
+                favouriteInfo={favouriteInfo}
+              />
+            )}
           </div>
         </div>
       </Container>

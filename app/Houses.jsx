@@ -14,6 +14,7 @@ function Houses({ houses, wishlists, userFavourites }) {
   const loadMoreListings = async () => {
     if (page > 30) return;
     const data = await fetchHouses(page);
+    console.log('DATA: ', data);
     setListings((prev) => [...prev, ...data]);
     setPage((prev) => prev + 1);
   };

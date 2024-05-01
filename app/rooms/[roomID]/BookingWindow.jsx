@@ -4,11 +4,13 @@ import React, { useState } from 'react';
 import { FaAngleDown } from 'react-icons/fa6';
 import { FaAngleUp } from 'react-icons/fa6';
 import { FaEuroSign } from 'react-icons/fa';
+import { LiaEuroSignSolid } from 'react-icons/lia';
 import DateRange from './DateRange';
 import { differenceInDays, differenceInCalendarDays } from 'date-fns';
 import Guests from './Guests';
 import { createReservation } from '@/app/_actions/actions';
-import { Award, UnfoldHorizontal } from 'lucide-react';
+import { VscClose } from 'react-icons/vsc';
+import { Separator } from '@radix-ui/react-dropdown-menu';
 
 function BookingWindow({ room, reservations }) {
   const [date, setDate] = useState({
@@ -40,7 +42,7 @@ function BookingWindow({ room, reservations }) {
       startDate: date.from,
       endDate: date.to,
       totalPrice:
-        differenceInCalendarDays(date.to, date.from) * Number(room.price),
+        (differenceInCalendarDays(date.to, date.from) - 1) * Number(room.price),
       listing: room._id,
     };
     const response = await createReservation(reservationInfo);
@@ -93,6 +95,58 @@ function BookingWindow({ room, reservations }) {
             Reserve
           </button>
         </div>
+        {date.from && date.to && (
+          <>
+            <div className='mt-6 space-y-6'>
+              <div className='flex items-center justify-between'>
+                <p className='flex items-center gap-1 text-lg'>
+                  <span className='flex items-center'>
+                    <LiaEuroSignSolid className='w-4 h-4' /> {room.price}
+                  </span>
+                  <span>
+                    <VscClose />
+                  </span>
+                  <span className='text-lg font-[400]'>
+                    {differenceInCalendarDays(date.to, date.from)} nights
+                  </span>
+                </p>
+                <div>
+                  <p className='flex items-end gap-4  text-lg'>
+                    <span className='flex items-center'>
+                      <LiaEuroSignSolid className='w-4 h-4' />{' '}
+                      {differenceInCalendarDays(date.to, date.from) *
+                        room.price}
+                    </span>
+                  </p>
+                </div>
+              </div>
+              <div className='flex items-center justify-between'>
+                <p className='flex items-center gap-1 text-lg'>Cleaning fee</p>
+                <div>
+                  <p className='flex items-end gap-4  text-lg'>
+                    <span className='flex items-center'>
+                      <LiaEuroSignSolid className='w-4 h-4' />
+                      30
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <Separator className='my-6 h-[1px] bg-[#dddddd]' />
+            <div className='flex items-center justify-between'>
+              <p className='font-semibold text-lg'>Total</p>
+              <div>
+                <p className='flex items-end gap-4 font-semibold text-lg'>
+                  <span className='flex items-center'>
+                    <FaEuroSign className='w-4 h-4' />
+                    {differenceInCalendarDays(date.to, date.from) * room.price +
+                      30}
+                  </span>
+                </p>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

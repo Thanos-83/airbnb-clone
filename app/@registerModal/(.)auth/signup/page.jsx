@@ -16,7 +16,7 @@ import { DropdownMenuSeparator } from '@radix-ui/react-dropdown-menu';
 import { useRouter } from 'next/navigation';
 import RegisterForm from '@/components/Auth/RegisterForm';
 
-export const dynamic = 'force-satic';
+export const dynamic = 'force-static';
 
 function RegisterDialogPage() {
   const router = useRouter();

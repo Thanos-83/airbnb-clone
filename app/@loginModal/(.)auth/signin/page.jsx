@@ -16,7 +16,7 @@ import { DropdownMenuSeparator } from '@radix-ui/react-dropdown-menu';
 import { useRouter } from 'next/navigation';
 import SignInForm from '@/components/Auth/LoginForm';
 
-export const dynamic = 'force-satic';
+export const dynamic = 'force-static';
 
 function LoginDialogPage() {
   const router = useRouter();
@@ -30,6 +30,9 @@ function LoginDialogPage() {
   return (
     <div>
       <Dialog open={open} onOpenChange={closeModal}>
+        <DialogTrigger asChild>
+          <button>Edit Profile</button>
+        </DialogTrigger>
         <DialogContent className='sm:max-w-xl'>
           <DialogHeader>
             <DialogTitle className='text-center pb-4 font-bold text-lg'>
