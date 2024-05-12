@@ -10,7 +10,7 @@ export const sessionSchema = new mongoose.Schema(
     sessionToken: {
       type: String,
       //   required: true,
-      unique: true,
+      // unique: true,
     },
     expires: {
       type: Date,

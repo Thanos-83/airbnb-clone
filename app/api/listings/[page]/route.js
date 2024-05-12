@@ -6,7 +6,7 @@ import { revalidatePath, revalidateTag } from 'next/cache';
 export const dynamic = 'force-dynamic';
 
 export async function GET(req, { params }) {
-  console.log('Params in fetching listings: ', params);
+  // console.log('Params in fetching listings: ', params);
   connectdb();
   try {
     const listingsCount = await Listing.countDocuments();

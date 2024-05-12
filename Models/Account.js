@@ -2,9 +2,9 @@ import mongoose from 'mongoose';
 
 export const accountSchema = new mongoose.Schema(
   {
-    user: {
+    userId: {
       type: mongoose.Schema.Types.ObjectId,
-      //   required: true,
+      required: true,
       ref: 'User',
     },
     type: {
@@ -19,9 +19,9 @@ export const accountSchema = new mongoose.Schema(
       type: String,
       // unique: true,
     },
-    refresh_token: {
-      type: String,
-    },
+    // refresh_token: {
+    //   type: String,
+    // },
     access_token: {
       type: String,
     },
@@ -37,15 +37,15 @@ export const accountSchema = new mongoose.Schema(
     id_token: {
       type: String,
     },
-    session_state: {
-      type: String,
-    },
-    oauth_token_secret: {
-      type: String,
-    },
-    oauth_token: {
-      type: String,
-    },
+    // session_state: {
+    //   type: String,
+    // },
+    // oauth_token_secret: {
+    //   type: String,
+    // },
+    // oauth_token: {
+    //   type: String,
+    // },
 
     // expires: timestamps,
   },

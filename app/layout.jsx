@@ -30,14 +30,10 @@ export default async function RootLayout({
               {loginModal}
             </>
           )}
-          <Navbar session={session} />
-          {/* <div> */}
+          <Navbar />
 
           {children}
-          {/* {registerModal} */}
-          {/* {loginModal} */}
 
-          {/* </div> */}
           <Toaster richColors />
         </AuthProvider>
       </body>

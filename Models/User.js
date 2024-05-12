@@ -35,15 +35,17 @@ const userSchema = new mongoose.Schema({
     required: false,
   },
   email: {
+    // type: String,
+    // required: false,
     type: String,
-    required: false,
+    require: true,
+    index: true,
+    unique: true,
+    sparse: true,
   },
-  password: {
-    type: String,
-    required: false,
-  },
+
   emailVerified: {
-    type: Date,
+    type: Boolean,
   },
   image: {
     type: String,
@@ -51,8 +53,9 @@ const userSchema = new mongoose.Schema({
 
   favourites: [userFavouriteSchema],
   accounts: [accountSchema],
-  sessions: [sessionSchema],
   listings: [listingSchema],
+  sessions: [sessionSchema],
+  accounts: [accountSchema],
   reservations: [reservationSchema],
 });
 

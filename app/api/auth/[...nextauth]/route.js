@@ -7,6 +7,11 @@ import FacebookProvider from 'next-auth/providers/facebook';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { sendVerificationRequest } from '@/lib/sendVerificationRequestResend';
 import connectdb from '@/database/db';
+import User from '@/Models/User';
+import Account from '@/Models/Account';
+import Session from '@/Models/Session';
+import { v4 as uuidv4 } from 'uuid';
+
 export const authOptions = {
   providers: [
     {
@@ -45,6 +50,13 @@ export const authOptions = {
     }),
   ],
   callbacks: {
+    async session({ session, user, token, account, profile, isNewUser }) {
+      console.log('IAM HERE 3');
+      session.user.id = user.id;
+      session.user.favourites = user.favourites;
+      session.user.reservations = user.reservations;
+      return session;
+    },
     async signIn({
       user,
       account,
@@ -54,60 +66,52 @@ export const authOptions = {
       credentials,
       isNewUser,
     }) {
-      // connectdb();
-      // console.log('IAM HERE 1');
-      if (account.provider === 'resend' && !email) {
-        user.name = '';
-        user.image = '';
-        user.accounts = [];
-        user.listings = [];
-        user.reservations = [];
-        user.favourites = [];
-        // console.log('USER_ID: ', user._id);
+      await connectdb();
+      console.log('IAM HERE 1');
+      console.log('Session in signIn callback: ', session);
+      console.log('Is new user signIn callback: ', isNewUser);
+      console.log('Credentials signIn callback: ', credentials);
+      console.log('Account signIn callback: ', account);
+      console.log('Profile signIn callback: ', profile);
+      console.log('Email at signIn callback: ', email);
+
+      const foundUser = await User.findOne({ email: profile.email });
+      console.log('User Exists: ', foundUser);
+
+      if (!foundUser) {
+        const newUser = {
+          name: profile.name,
+          email: profile.email,
+          image: profile.picture,
+          emailVerified: profile.email_verified,
+          // emailVerified: null,
+          accounts: [],
+          listings: [],
+          reservations: [],
+          favourites: [],
+          sessions: [],
+        };
+        // console.log('New user: ', newUser);
+        const createdUser = await User.create(newUser);
+        console.log('Created User: ', createdUser);
+        const newAccount = { ...account, userId: createdUser._id };
+        console.log('New Account: ', newAccount);
+
+        const createdAccount = await Account.create(newAccount);
+        // console.log('New Account: ', createdAccount);
+        // const session = { sessionToken: uuidv4(), userId: createdUser._id };
+        // const newSession = await Session.create(session);
+        // console.log('New Session: ', newSession);
+
+        return true;
       } else {
-        user.accounts = [];
-        user.listings = [];
-        user.reservations = [];
-        user.favourites = [];
+        return true;
       }
-      // console.log('User: ', user);
-      // console.log('User account: ', account);
-      // console.log('User session: ', session);
-
-      // console.log('User profile: ', profile);
-      // console.log('User email: ', email);
-      // console.log('User credentials: ', credentials);
-      // console.log('User is new User: ', isNewUser);
-
-      return user;
-    },
-    async jwt({ token, user, account, profile, session, isNewUser }) {
-      console.log('IAM HERE 2');
-
-      console.log('User: ', user);
-      console.log('User account: ', account);
-      console.log('User profile: ', profile);
-      console.log('User session: ', session);
-      console.log('User is new User: ', isNewUser);
-      return token;
-    },
-    async session({ session, user, token, account, profile, isNewUser }) {
-      // console.log('IAM HERE 3');
-
-      // console.log('Session User: ', user);
-      // console.log('User session: ', session);
-      // console.log('User token: ', token);
-      // console.log('User account: ', account);
-      // console.log('User profile: ', profile);
-      // console.log('User is new User: ', isNewUser);
-      session.user.id = user.id;
-      session.user.favourites = user.favourites;
-      return session;
     },
   },
   pages: {
     signIn: '/auth/signin',
-    // signIn: '/',
+    error: '/auth/error',
   },
   session: {
     // strategy: 'jwt',

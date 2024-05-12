@@ -55,7 +55,7 @@ function Houses({ houses, wishlists, userFavourites }) {
       </div>
       {page < 30 && (
         <div className='mt-12 flex justify-center' ref={ref}>
-          <div class='lds-spinner'>
+          <div className='lds-spinner'>
             <div></div>
             <div></div>
             <div></div>

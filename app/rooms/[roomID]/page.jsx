@@ -28,6 +28,8 @@ import { fetchReservations } from '@/app/_actions/actions';
 async function SingleRoom({ params }) {
   const session = await getServerSession(authOptions);
 
+  console.log('Server Session: ', session);
+
   const roomInfo = await fetchSingleRoom(params.roomID);
   // console.log('Single Room Info: ', roomInfo);
 

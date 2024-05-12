@@ -7,7 +7,7 @@ import { WishlistsDialog } from '@/components/LikeButton/WishlistsDialog';
 import LikeButton from '@/components/LikeButton/LikeButton';
 
 function FavouriteButton({ favourite, roomID, wishlists, favouriteInfo }) {
-  // console.log('favourite: ', favourite);
+  console.log('Favourite button at favourite: ', favourite);
 
   return (
     <div>

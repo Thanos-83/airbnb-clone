@@ -14,7 +14,7 @@ import { connect } from 'mongoose';
 
 export const fetchHouses = async (pageParams) => {
   try {
-    console.log('Fetch Houses: ', pageParams);
+    // console.log('Fetch Houses: ', pageParams);
     const res = await fetch(
       `${process.env.SITE_URL}/api/listings/${pageParams}`,
       {
@@ -52,6 +52,9 @@ export const createReservation = async (info) => {
   connectdb();
   try {
     const reservation = await Reservation.create(data);
+    const user = await User.findOne({ _id: session.user.id });
+    user.reservations.push(reservation);
+    await user.save();
     revalidatePath(`/rooms/${info.listing}`);
     return { message: 'Reservation created', reservation };
   } catch (error) {
@@ -117,13 +120,13 @@ export const handleWishlistAction = async (data) => {
       user: session.user.id,
       rooms: [roomInfo],
     };
-    const response = await Wishlist.create(wishlist);
+    const createdWishlist = await Wishlist.create(wishlist);
 
     const user = await User.findById({ _id: session.user.id });
 
     const userFavourite = {
       ...roomInfo,
-      wishlist_id: response._id.toString(),
+      wishlist_id: createdWishlist._id.toString(),
     };
     // console.log('User favourite: ', userFavourite);
     user.favourites.push(userFavourite);
@@ -176,7 +179,8 @@ export const addFavouriteToWishlist = async (data) => {
 
     revalidateTag('wishlists');
     revalidateTag('favourites');
-    revalidatePath('wishlists');
+    revalidatePath('/wishlists');
+    revalidatePath('/');
     return {
       message: 'success',
       updatedWishlist: JSON.parse(JSON.stringify(wishlist)),
@@ -223,9 +227,30 @@ export const removeFavourite = async (data) => {
 
 export const deleteWishlist = async (wishlistID) => {
   // console.log(wishlistID);
+  // const wishlistRomms = await Wishlist.find()
   const response = await Wishlist.findByIdAndDelete(wishlistID);
   // console.log('Deleted Wishlist: ', response);
+  const wishlistRooms = response.rooms;
+  const user = await User.findOne({ _id: response.user.toString() });
+  // console.log('User: ', user);
+  const userFavourites = user.favourites;
+
+  wishlistRooms.forEach((room) => {
+    let roomIndex = userFavourites.findIndex(
+      (favourite) => favourite.id === room.id
+    );
+    console.log('Room Index: ', roomIndex);
+    if (roomIndex || roomIndex === 0) {
+      userFavourites.splice(roomIndex, 1);
+      console.log('User Favourites: ', userFavourites);
+    }
+  });
+
+  user.favourites = userFavourites;
+  await user.save();
   revalidateTag('wishlists');
+  revalidateTag('listings');
+  revalidatePath('/');
 };
 
 export const updateWishlistName = async (data) => {

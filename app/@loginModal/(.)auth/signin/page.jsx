@@ -30,9 +30,9 @@ function LoginDialogPage() {
   return (
     <div>
       <Dialog open={open} onOpenChange={closeModal}>
-        <DialogTrigger asChild>
+        {/* <DialogTrigger asChild>
           <button>Edit Profile</button>
-        </DialogTrigger>
+        </DialogTrigger> */}
         <DialogContent className='sm:max-w-xl'>
           <DialogHeader>
             <DialogTitle className='text-center pb-4 font-bold text-lg'>

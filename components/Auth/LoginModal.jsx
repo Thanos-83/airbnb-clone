@@ -40,7 +40,14 @@ export function LoginModal({ session }) {
                 <p className='text-[#222222] font-semibold'>Messages</p>
               </DropdownMenuItem>
               <DropdownMenuItem className='pt-2 px-3 w-full text-lg'>
-                <p className='text-[#222222] font-semibold'>Trips</p>
+                <p className='text-[#222222] font-semibold relative'>
+                  Trips{' '}
+                  {session.user.reservations.length > 0 && (
+                    <span className='absolute -top-1 -right-6 rounded-full bg-red-600 text-white text-sm py-[1px] px-2'>
+                      {session.user.reservations.length}
+                    </span>
+                  )}
+                </p>
               </DropdownMenuItem>
               <DropdownMenuItem asChild className='pt-2 px-3 w-full text-lg'>
                 <Link
