@@ -24,23 +24,40 @@ export const fetchHouses = async (pageParams) => {
       }
     );
     const data = await res.json();
-    return data.listings;
+    return JSON.parse(JSON.stringify(data.listings));
   } catch (error) {
     return error;
   }
 };
 
-export const fetchSearchResults = async (pageParams, page = 1) => {
+export const fetchSearchResults = async (pageParams, page) => {
   try {
     console.log('Fetch Houses: ', pageParams);
     connectdb();
+    const limitOfListings = 15;
+    const allData = await Listing.find({
+      'address.market': pageParams.location,
+    }).countDocuments();
     const data = await Listing.find({
       'address.market': pageParams.location,
     })
-      .limit(15)
-      .skip((page - 1) * 15);
-    // console.log('Search results: ', data[1]);
-    return JSON.parse(JSON.stringify(data));
+      .limit(limitOfListings)
+      .skip((page - 1) * limitOfListings);
+
+    const pages = Math.ceil(allData / limitOfListings);
+
+    // console.log('Search results: ', {
+    //   data ,
+    //   pagesNumber: pages,
+    // });
+    revalidatePath(`/search?location=${pageParams.location}`);
+    return JSON.parse(
+      JSON.stringify({
+        data,
+        pagesNumber: pages,
+        numberOfListings: allData,
+      })
+    );
   } catch (error) {
     return error;
   }
@@ -109,7 +126,7 @@ export const fetchWishlists = async () => {
 export const handleWishlistAction = async (data) => {
   const session = await getServerSession(authOptions);
   connectdb();
-  // console.log('Create wishlist inside server action: ', data);
+  console.log('Session inside wishlist server action: ', session);
 
   // we construct the info of the room we will save to wishlist
   const roomInfo = { ...data.favouriteInfo, note: '' };
@@ -137,7 +154,7 @@ export const handleWishlistAction = async (data) => {
     revalidatePath('/wishlists');
     return {
       message: 'success',
-      createdWishlsit: JSON.parse(JSON.stringify(response)),
+      createdWishlsit: JSON.parse(JSON.stringify(createdWishlist)),
     };
   } catch (error) {
     return { message: 'fail', error };
@@ -239,10 +256,10 @@ export const deleteWishlist = async (wishlistID) => {
     let roomIndex = userFavourites.findIndex(
       (favourite) => favourite.id === room.id
     );
-    console.log('Room Index: ', roomIndex);
+    // console.log('Room Index: ', roomIndex);
     if (roomIndex || roomIndex === 0) {
       userFavourites.splice(roomIndex, 1);
-      console.log('User Favourites: ', userFavourites);
+      // console.log('User Favourites: ', userFavourites);
     }
   });
 

@@ -39,11 +39,13 @@ function LoginDialogPage() {
               Login
             </DialogTitle>
             <DropdownMenuSeparator className='bg-[#dddddd]' />
-            <DialogDescription className='mt-2'>
-              <h2 className='text-xl font-bold mt-2 text-black'>
-                Welcome to Airbnb
-              </h2>
-              <p className='my-2'>Here you can login to your account!</p>
+            <DialogDescription asChild className='mt-2'>
+              <div>
+                <h2 className='text-xl font-bold mt-2 text-black'>
+                  Welcome to Airbnb
+                </h2>
+                <p className='my-2'>Here you can login to your account!</p>
+              </div>
             </DialogDescription>
           </DialogHeader>
           <SignInForm />

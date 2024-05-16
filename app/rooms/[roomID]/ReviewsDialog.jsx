@@ -69,6 +69,7 @@ export function ReviewsDialog({ reviewScores, reviews, isMobile }) {
                       onChange={(e) => setSearchReview(e.target.value)}
                       name='reviewsInput'
                       type='text'
+                      id='reviewsInput'
                       value={searchReview}
                       placeholder='Search reviews'
                       className='flex-1 bg-white px-2 py-2 outline-none'

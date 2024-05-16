@@ -1,41 +1,27 @@
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from '@/components/ui/pagination';
+'use client';
 
-export function ResultsPagination({ nextResult }) {
+import React, { useState } from 'react';
+
+import ReactPaginate from 'react-paginate';
+
+export function ResultsPagination({ nextResult, pages }) {
+  const handlePageClick = (event) => {
+    console.log('Event: ', event);
+    nextResult(event.selected + 1);
+  };
   return (
-    <Pagination>
-      <PaginationContent>
-        <PaginationItem>
-          <PaginationPrevious href='#' />
-          {/* <button onClick={() => nextResult(1)}>1</button> */}
-        </PaginationItem>
-        <PaginationItem>
-          <button onClick={() => nextResult(1)}>1</button>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationEllipsis />
-        </PaginationItem>
-        <PaginationItem>
-          <button onClick={() => nextResult(2)}>2</button>
-        </PaginationItem>
-        <PaginationItem>
-          <button onClick={() => nextResult(3)}>3</button>
-          {/* <PaginationLink href='#'>3</PaginationLink> */}
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationEllipsis />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationNext href='#' />
-        </PaginationItem>
-      </PaginationContent>
-    </Pagination>
+    <div className='mt-8 flex items-center justify-center'>
+      <ReactPaginate
+        breakLabel='...'
+        nextLabel={<span> next </span>}
+        onPageChange={handlePageClick}
+        containerClassName='pagination_container'
+        pageRangeDisplayed={3}
+        marginPagesDisplayed={2}
+        pageCount={pages}
+        previousLabel='< previous'
+        renderOnZeroPageCount={null}
+      />
+    </div>
   );
 }

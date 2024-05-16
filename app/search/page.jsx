@@ -13,7 +13,7 @@ export default async function SearchPage({ searchParams }) {
 
   const wishlists = await fetchWishlists();
   console.log('Search Params: ', searchParams);
-  let page = 2;
+  let page = 1;
   const searchResults = await fetchSearchResults(searchParams, page);
   // console.log('Search Results: ', searchResults);
 

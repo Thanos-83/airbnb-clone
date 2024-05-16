@@ -32,30 +32,6 @@ export default async function Home({ searchParams }) {
             wishlists={wishlists && wishlists.wishlists}
             userFavourites={userFavourites}
           />
-          {/* {houses?.map((house) => (
-            <House
-              key={house._id}
-              house={JSON.parse(JSON.stringify(house))}
-              // house={house}
-              wishlists={
-                wishlists && JSON.parse(JSON.stringify(wishlists.wishlists))
-              }
-              favourite={
-                userFavourites
-                  ? userFavourites.favourites.find(
-                      (favourite) => favourite.id === house._id.toString()
-                    )
-                  : false
-              }
-              isFavourite={
-                userFavourites
-                  ? userFavourites.favourites.some(
-                      (favourite) => favourite.id === house._id.toString()
-                    )
-                  : false
-              }
-            />
-          ))} */}
         </div>
       </Container>
     </main>

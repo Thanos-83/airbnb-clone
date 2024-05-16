@@ -66,7 +66,11 @@ export function LoginModal({ session }) {
                 <Link href='/auth/signin'>Login</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild className='px-3 pb-4 w-full text-lg'>
-                <Link href='/auth/signup'>Register</Link>
+                <Link
+                  className='pointer-events-none cursor-not-allowed'
+                  href='/auth/signup'>
+                  Register
+                </Link>
               </DropdownMenuItem>
             </>
           )}

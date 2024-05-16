@@ -8,7 +8,9 @@ function Review({ review, inDialog, isMobile }) {
     <div
       className={`${
         !isMobile && 'rounded-xl shadow-xl p-6 my-8'
-      } md:rounded-none md:shadow-none md:p-0 md:my-0 flex flex-col`}>
+      } md:rounded-none md:shadow-none md:p-0  flex flex-col ${
+        inDialog ? 'mb-6' : 'md:my-0'
+      }`}>
       <div
         className={`${
           !isMobile && 'order-3'

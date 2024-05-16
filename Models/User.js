@@ -1,8 +1,6 @@
 import mongoose from 'mongoose';
-import { accountSchema } from './Account';
 import { reservationSchema } from './Reservation';
 import { listingSchema } from './Listing';
-import { sessionSchema } from './Session';
 
 const userFavouriteSchema = new mongoose.Schema({
   id: { type: String },
@@ -29,35 +27,37 @@ const userFavouriteSchema = new mongoose.Schema({
   },
 });
 
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: false,
-  },
-  email: {
-    // type: String,
-    // required: false,
-    type: String,
-    require: true,
-    index: true,
-    unique: true,
-    sparse: true,
-  },
+const userSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: false,
+    },
+    email: {
+      type: String,
+      require: true,
+      unique: true,
+      sparse: true,
+    },
 
-  emailVerified: {
-    type: Boolean,
+    emailVerified: {
+      // type: Boolean,
+      type: Date,
+    },
+    image: {
+      type: String,
+    },
+    accountType: {
+      type: String,
+    },
+    favourites: [userFavouriteSchema],
+    listings: [listingSchema],
+    reservations: [reservationSchema],
   },
-  image: {
-    type: String,
-  },
-
-  favourites: [userFavouriteSchema],
-  accounts: [accountSchema],
-  listings: [listingSchema],
-  sessions: [sessionSchema],
-  accounts: [accountSchema],
-  reservations: [reservationSchema],
-});
+  {
+    timestamps: true,
+  }
+);
 
 const User = mongoose.models.User || mongoose.model('User', userSchema);
 

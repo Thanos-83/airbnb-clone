@@ -13,27 +13,24 @@ import {
   Row,
   Section,
   Text,
-} from "@react-email/components";
-import { Tailwind } from "@react-email/tailwind";
-import * as React from "react";
+} from '@react-email/components';
+import { Tailwind } from '@react-email/tailwind';
+import * as React from 'react';
 
-
-export const MagicLinkEmail = ({identifier, url}) => {
-
+export const MagicLinkEmail = ({ identifier, url }) => {
   return (
     <Html>
       <Head />
       <Preview>This is a preview text</Preview>
       <Tailwind>
-        <Body className="bg-white my-auto mx-auto font-sans px-2">
+        <Body className='bg-white my-auto mx-auto font-sans px-2'>
           <Heading>This is the identifier: {identifier}</Heading>
-          <Heading>This is the url</Heading>
+          <Heading>This is the magic link:</Heading>
           <Link href={url}>Click the Link</Link>
         </Body>
       </Tailwind>
     </Html>
   );
 };
-
 
 export default MagicLinkEmail;

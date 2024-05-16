@@ -69,11 +69,11 @@ export function WishlistsDialog({ info, wishlists }) {
 
       {/* </DialogTrigger> */}
       <DialogContent className='sm:max-w-[640px] p-0'>
-        <DialogHeader asChild>
+        <div>
           <h2 className='p-4 text-xl text-center text-[#222222] font-[600]'>
             Add to Wishlist
           </h2>
-        </DialogHeader>
+        </div>
         <hr className='h-[2px] bg-slate-100' />
         <div className='max-h-[400px] overflow-y-auto px-8 grid grid-cols-2 gap-4'>
           {wishlists.map((wishlist) => (
