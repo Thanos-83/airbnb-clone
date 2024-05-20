@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import House from '../House';
 import Link from 'next/link';
 import { ResultsPagination } from './Pagination';
@@ -11,20 +11,49 @@ import { useSearchParams } from 'next/navigation';
 function SearchResults({ searchResults, wishlists, userFavourites }) {
   const searchParams = useSearchParams();
   const [results, setResults] = useState(searchResults);
+  const [location, setLocation] = useState(searchParams.get('location'));
+  const [page, setPage] = useState(null);
+  // console.log('Iam in search results component....');
   // console.log('Search Results client: ', results);
 
   // console.log('Search Params client: ', searchParams.get('location'));
   const nextResult = async (page) => {
-    const searchResults = await fetchSearchResults(
-      { location: searchParams.get('location') },
-      page
-    );
-    window.scrollTo({
-      top: '190px',
-      behavior: 'smooth',
-    });
-    setResults(searchResults);
+    setPage(page);
   };
+
+  useEffect(() => {
+    const fetchResults = async () => {
+      const searchResults = await fetchSearchResults(
+        { location: searchParams.get('location') },
+        // location,
+        page
+      );
+      window.scrollTo({
+        top: '190px',
+        behavior: 'smooth',
+      });
+      setResults(searchResults);
+    };
+
+    fetchResults();
+  }, [page]);
+
+  useEffect(() => {
+    const fetchResultsByLocation = async () => {
+      const searchResults = await fetchSearchResults(
+        { location: searchParams.get('location') },
+        0
+      );
+      window.scrollTo({
+        top: '190px',
+        behavior: 'smooth',
+      });
+      setResults(searchResults);
+    };
+
+    fetchResultsByLocation();
+  }, [searchParams]);
+
   return (
     <>
       <section className='w-full md:w-[60%] 3xl:w-1/2  pl-8 pb-12'>

@@ -28,6 +28,7 @@ function LikeButton({ children, setOpen, favourite, wishlistID, roomID }) {
   };
   return (
     <button
+      aria-label='add favourite to wishlist'
       onClick={() => handleFavourite()}
       className={`${
         pathname !== `/rooms/${roomID}`

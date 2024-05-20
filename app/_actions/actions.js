@@ -36,13 +36,11 @@ export const fetchSearchResults = async (pageParams, page) => {
     connectdb();
     const limitOfListings = 15;
     const allData = await Listing.find({
-      'address.market': pageParams.location,
+      $text: { $search: pageParams.location },
     }).countDocuments();
-    const data = await Listing.find({
-      'address.market': pageParams.location,
-    })
+    const data = await Listing.find({ $text: { $search: pageParams.location } })
       .limit(limitOfListings)
-      .skip((page - 1) * limitOfListings);
+      .skip(page * limitOfListings);
 
     const pages = Math.ceil(allData / limitOfListings);
 

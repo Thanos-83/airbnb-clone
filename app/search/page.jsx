@@ -13,17 +13,22 @@ export default async function SearchPage({ searchParams }) {
 
   const wishlists = await fetchWishlists();
   console.log('Search Params: ', searchParams);
-  let page = 1;
+  let page = 0;
   const searchResults = await fetchSearchResults(searchParams, page);
   // console.log('Search Results: ', searchResults);
 
   return (
     <main className='flex gap-8 items-start'>
+      {/* <section> */}
       <SearchResults
         searchResults={searchResults}
         wishlists={wishlists}
         userFavourites={userFavourites}
       />
+      {/* </section> */}
+      {/* <section>
+
+      </section> */}
     </main>
   );
 }

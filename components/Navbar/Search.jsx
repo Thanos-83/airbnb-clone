@@ -10,9 +10,10 @@ function Search() {
   const [location, setLocation] = useState('');
   const searchResults = () => {
     router.push(`/search?location=${location}`, { shallow: false });
-    setLocation('');
     // window.location.reload();
+
     // router.reload();
+    setLocation('');
   };
 
   return (

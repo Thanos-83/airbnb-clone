@@ -75,9 +75,10 @@ export function WishlistsDialog({ info, wishlists }) {
           </h2>
         </div>
         <hr className='h-[2px] bg-slate-100' />
-        <div className='max-h-[400px] overflow-y-auto px-8 grid grid-cols-2 gap-4'>
+        <div className='max-h-[400px] overflow-y-auto px-8 grid items-start grid-cols-2 gap-4'>
           {wishlists.map((wishlist) => (
             <button
+              aria-label='add favourite to wishlist'
               onClick={() => handleAddToWishlist(wishlist)}
               className='text-start'
               key={wishlist._id}>

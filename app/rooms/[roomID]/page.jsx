@@ -25,10 +25,25 @@ import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import BookingWindow from './BookingWindow';
 import { fetchReservations } from '@/app/_actions/actions';
 
+// export const metadata = {
+//   title: 'rooms/roomID',
+//   description: 'this is the single room page',
+// };
+
+export async function generateMetadata({ params }) {
+  console.log('Metada params: ', params);
+
+  const roomInfo = await fetchSingleRoom(params.roomID);
+
+  return {
+    title: roomInfo.room.name,
+  };
+}
+
 async function SingleRoom({ params }) {
   const session = await getServerSession(authOptions);
 
-  console.log('Server Session: ', session);
+  // console.log('Server Session: ', session);
 
   const roomInfo = await fetchSingleRoom(params.roomID);
   // console.log('Single Room Info: ', roomInfo);
