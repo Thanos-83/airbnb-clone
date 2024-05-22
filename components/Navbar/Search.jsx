@@ -17,10 +17,10 @@ function Search() {
   };
 
   return (
-    <div className='border-[1px] flex-1 mx-12 max-w-[60rem] md:w-auto h-16 rounded-full shadow-sm hover:shadow-md transition overflow-hidden'>
+    <div className=' border-[1px] sm:mx-4 md:mx-12 max-w-[60rem] md:w-auto h-16 rounded-full shadow-sm hover:shadow-md transition overflow-hidden'>
       <div className='flex flex-row items-center justify-between px-4 h-full'>
-        <div className='h-full w-1/2'>
-          <label htmlFor='location src-only'>
+        <div className='h-full flex-1'>
+          <label htmlFor='location' className='src-only'>
             <input
               name='location'
               id='location'
@@ -33,17 +33,17 @@ function Search() {
           </label>
         </div>
 
-        <div className='hidden w-1/4 sm:block text-lg font-semibold px-6 border-x-[1px]  text-center'>
+        <div className='hidden w-1/4 text-lg font-semibold px-6 border-x-[1px]  text-center'>
           <DatePicker />
         </div>
-        <div className='w-1/4 text-sm pl-6 pr-2 text-gray-600 flex  flex-row items-center justify-between gap-3'>
+        <div className='hidden w-1/4 text-sm pl-6 pr-2 text-gray-600   flex-row items-center justify-between gap-3'>
           <div className='hidden sm:block text-sm font-semibold'> Guest</div>
-          <button
-            onClick={() => searchResults()}
-            className='p-2 bg-rose-500 rounded-full text-white'>
-            <BiSearch size={16} className='font-bold' />
-          </button>
         </div>
+        <button
+          onClick={() => searchResults()}
+          className='p-2 bg-rose-500 rounded-full text-white'>
+          <BiSearch size={16} className='font-bold' />
+        </button>
       </div>
     </div>
   );

@@ -56,11 +56,11 @@ function SearchResults({ searchResults, wishlists, userFavourites }) {
 
   return (
     <>
-      <section className='w-full md:w-[60%] 3xl:w-1/2  pl-8 pb-12'>
+      <section className='w-full lg:w-[60%] xl:w-[50%] 2xl:w-[60%] 4xl:w-[40%] px-4 lg:px-0 lg:pl-8 pb-12'>
         <p className='my-6 text-md font-semibold'>
           {results?.numberOfListings} places in {searchParams.get('location')}
         </p>
-        <div className=' grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8'>
+        <div className=' grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 2xl:grid-cols-3 gap-8'>
           {results.data.length > 0 ? (
             results?.data.map((house) => (
               <House
@@ -104,7 +104,7 @@ function SearchResults({ searchResults, wishlists, userFavourites }) {
           pages={results.pagesNumber}
         />
       </section>
-      <section className='hidden md:block md:w-[40%] 3xl:w-1/2 h-[calc(100vh-190px)] sticky top-[190px]'>
+      <section className='hidden lg:block lg:w-[40%] xl:w-[50%] 2xl:w-[40%] 4xl:w-[60%] h-[calc(100vh-190px)] sticky top-[190px]'>
         {results?.data.length > 0 && <SearchMapBox rooms={results?.data} />}
       </section>
     </>

@@ -25,11 +25,6 @@ import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import BookingWindow from './BookingWindow';
 import { fetchReservations } from '@/app/_actions/actions';
 
-// export const metadata = {
-//   title: 'rooms/roomID',
-//   description: 'this is the single room page',
-// };
-
 export async function generateMetadata({ params }) {
   console.log('Metada params: ', params);
 
@@ -155,8 +150,8 @@ async function SingleRoom({ params }) {
           </button>
         </div>
       </Container>
-      <div className='z-10 sticky top-0'>
-        <nav className='bg-white  border-b border-b-[#dddddd]'>
+      <div className='hidden md:block z-10 sticky top-0'>
+        <nav className=' bg-white  border-b border-b-[#dddddd]'>
           <Container medium={true}>
             <ul className='flex items-center gap-8'>
               <li className='font-semibold text-xl '>
@@ -186,31 +181,33 @@ async function SingleRoom({ params }) {
       <Container medium={true}>
         <div className='mt-12 mb-20 flex flex-col md:flex-row items-start gap-16'>
           <div className='w-full md:w-[60%]'>
-            <h2 className='text-3xl font-semibold'>{room.room_type}</h2>
-            <div className='flex items-center gap-1'>
-              <p className='text-[1.25rem] font-normal'>
+            <h2 className='text-[1rem] md:text-3xl font-semibold'>
+              {room.room_type}
+            </h2>
+            <div className='flex flex-wrap items-center gap-1'>
+              <p className='text-sm md:text-[1.25rem] font-normal'>
                 {Number(room.accommodates)} guests
               </p>
               <span>
                 <PiDotOutlineBold />
               </span>
-              <p className='text-[1.25rem] font-normal'>
+              <p className='text-sm md:text-[1.25rem] font-normal'>
                 {Number(room.bedrooms)} bedrooms
               </p>
               <span>
                 <PiDotOutlineBold />
               </span>
-              <p className='text-[1.25rem] font-normal'>
+              <p className='text-sm md:text-[1.25rem] font-normal'>
                 {Number(room.beds)} beds
               </p>
               <span>
                 <PiDotOutlineBold />
               </span>
-              <p className='text-[1.25rem] font-normal'>
+              <p className='text-sm md:text-[1.25rem] font-normal'>
                 {Number(room.bathrooms)} bathrooms
               </p>
             </div>
-            <div className='flex items-center gap-1 mt-2'>
+            <div className='hidden md:flex items-center gap-1 mt-2'>
               <p className='flex items-center text-[1.25rem]  font-semibold'>
                 <FaStar className='w-5 h-5 mr-2' />
                 {room.number_of_reviews > 0 &&
@@ -236,7 +233,7 @@ async function SingleRoom({ params }) {
             <div className='h-[1px] bg-[#DDDDDD]' />
             <div className='my-12'>
               <p className='font-normal text-xl'>{room.summary}</p>
-              <button className='mt-6 flex items-center gap-2 underline font-semibold text-xl'>
+              <button className='mt-6 flex items-center gap-2 underline font-semibold text-[1rem] md:text-xl'>
                 Show more <FaAngleRight />
               </button>
             </div>

@@ -149,7 +149,7 @@ export const authOptions = {
       session.user.id = token.id;
       session.user.favourites = token.favourites;
       session.user.reservations = token.reservations;
-
+      // console.log('Session in session callback:: ', session);
       return session;
     },
   },

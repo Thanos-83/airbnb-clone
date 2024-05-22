@@ -45,6 +45,11 @@ function SearchMapBox({ rooms }) {
   }, [center.longitude, center.latitude]);
   // console.log('View State: ', center);
 
+  const viewport = {
+    width: 400,
+    height: 400,
+  };
+
   return (
     <Map
       mapStyle='mapbox://styles/thanos-webdev/clu847y6100en01pi2dna4xbw'

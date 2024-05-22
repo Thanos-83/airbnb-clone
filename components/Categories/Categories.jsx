@@ -21,9 +21,9 @@ import { GiPalmTree } from 'react-icons/gi';
 import { PiMountains } from 'react-icons/pi';
 import { GiTreehouse } from 'react-icons/gi';
 import CategoryBox from './CategoryBox';
-import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
+import { HiOutlineAdjustmentsHorizontal } from 'react-icons/hi2';
 import Container from '../Container';
-
+import { usePathname } from 'next/navigation';
 
 export const categories = [
   {
@@ -109,24 +109,30 @@ export const categories = [
 ];
 
 function Categories() {
+  const pathname = usePathname();
+
   return (
-    <Container>
-    <div className='flex items-center gap-8'>
-      <div className='overflow-x-auto no-scrollbar'>
+    <Container fluid={pathname === '/search'}>
+      <div className='flex items-center justify-center gap-8'>
+        <div className='overflow-x-auto no-scrollbar'>
           <div className='flex items-center gap-10  w-max'>
-          {categories?.map(({label,icon}) => (
-            // <div key={label} className='flex flex-col items-center'>
-            //   <Icon size={26}/>
-            //   <p className='break-keep'>{label}</p>
-            // </div>
-            <CategoryBox key={label} label={label} icon={icon}/>
-          ))}
+            {categories?.map(({ label, icon }) => (
+              // <div key={label} className='flex flex-col items-center'>
+              //   <Icon size={26}/>
+              //   <p className='break-keep'>{label}</p>
+              // </div>
+              <CategoryBox key={label} label={label} icon={icon} />
+            ))}
           </div>
         </div>
         <div>
-          <button className='flex p-4 items-center gap-4 border border-[#dddddd] rounded-xl text-[#222222]'> <HiOutlineAdjustmentsHorizontal size={26} className=''/>  <span className='text-sm font-[600]'>Filters</span></button>
+          <button className='flex p-4 items-center gap-4 border border-[#dddddd] rounded-xl text-[#222222]'>
+            {' '}
+            <HiOutlineAdjustmentsHorizontal size={26} className='' />{' '}
+            <span className='text-sm font-[600]'>Filters</span>
+          </button>
         </div>
-    </div>
+      </div>
     </Container>
   );
 }

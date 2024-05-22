@@ -13,43 +13,40 @@ const Navbar = () => {
   const { data: session, status } = useSession();
   // console.log('Session: ', session);
   // console.log('Session status: ', status);
-  // console.log('Pathname:: ', pathname.split('/')[1]);
+  const pathnameArray = pathname.split('/');
+  const pathnameLength = pathnameArray.length;
+  const inWishlist =
+    pathnameLength === 3 && pathnameArray.includes('wishlists');
+  // console.log('Pathname:: ', pathname.split('/'));
   return (
     <header
       className={`${
         pathname.split('/')[1] !== 'rooms' && 'sticky top-0'
       } w-full bg-white z-50 border-bottom border-[#f7f7f7]`}>
       <div className='py-4 border-b-[1px]'>
-        <Container>
+        <Container fluid={pathname === '/search' || inWishlist}>
           <div className='flex items-center gap-3 justify-between'>
             <Logo />
-            <Search />
+            <div className='flex-1 max-w-[900px] hidden sm:block'>
+              <Search />
+            </div>
             <div className='relative'>
               <div className='flex items-center gap-4'>
                 <button
                   onClick={() => {}}
-                  className='
-            hidden
-            lg:block
-            text-lg
-            font-semibold
-            py-3
-            px-4
-            rounded-full
-            hover:bg-neutral-100
-            transition
-            '>
+                  className='hidden lg:block text-lg font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition'>
                   Airbnb your home
                 </button>
                 <LoginModal session={session} />
               </div>
             </div>
           </div>
+          <div className='flex-1 mt-4 sm:hidden'>
+            <Search />
+          </div>
         </Container>
       </div>
-      {(pathname === '/' ||
-        pathname === '/search' ||
-        pathname === '/auth/signin') && <Categories />}
+      {(pathname === '/' || pathname === '/search') && <Categories />}
     </header>
   );
 };

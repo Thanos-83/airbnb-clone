@@ -10,8 +10,8 @@ export function ResultsPagination({ nextResult, pages }) {
     nextResult(event.selected);
   };
   const [pagesNumber, setPagesNumber] = useState(pages);
-  console.log('iam here...', pages);
-  console.log('iam here 2...', pagesNumber);
+  // console.log('iam here...', pages);
+  // console.log('iam here 2...', pagesNumber);
   useEffect(() => {
     setPagesNumber(pages);
   }, [pages]);

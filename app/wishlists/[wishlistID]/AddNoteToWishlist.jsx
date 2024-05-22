@@ -38,7 +38,7 @@ export function AddNoteToWishlist({ house, wishlistID, roomID }) {
     reset();
     setOpen(false);
     // setSettingsOpen(false);
-    toast.success(`Wishlist renamed successfuly!`, {
+    toast.success(`Note added successfuly!`, {
       position: 'bottom-left',
     });
     setNoteLength(0);

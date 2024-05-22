@@ -31,6 +31,8 @@ function House({ house, wishlists, isFavourite, favourite }) {
             height={600}
             alt={house.name}
             className='aspect-square object-cover'
+            placeholder='blur'
+            blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP88R8AAvUB+VkkrXoAAAAASUVORK5CYII='
           />
           <p className='absolute top-3 left-4 text-[#222222] font-[600] bg-white rounded-full py-1 px-3'>
             Guest favourite

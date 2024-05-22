@@ -21,13 +21,13 @@ async function SingleWishlist({ params }) {
   // console.log('Single Wishlist: ', typeof wishlist.rooms[0]);
   return (
     <main className='flex gap-8 items-start'>
-      <section className='w-full md:w-[60%] 3xl:w-1/2  pl-8 pb-12'>
+      <section className='w-full lg:w-[60%] xl:w-[50%] 2xl:w-[60%] 4xl:w-[40%] px-4 lg:pl-8 pb-12'>
         <TopBar wishlistInfo={wishlist} />
         <h1 className='mb-8 text-3xl font-semibold text-[#222222]'>
           {wishlist.wishlistName}
         </h1>
         <BookingActions />
-        <div className='my-12 grid grid-cols-1 md:grid-cols-2  xl:grid-cols-3 gap-8'>
+        <div className='my-12 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 2xl:grid-cols-3 gap-8'>
           {wishlist.rooms.length > 0 ? (
             wishlist.rooms.map((room) => (
               <WishlistItem
@@ -52,7 +52,7 @@ async function SingleWishlist({ params }) {
           )}
         </div>
       </section>
-      <section className='hidden md:block md:w-[40%] 3xl:w-1/2 h-[calc(100vh-96px)] sticky top-[96px]'>
+      <section className='hidden lg:block lg:w-[40%] xl:w-[50%] 2xl:w-[40%] 4xl:w-[60%] h-[calc(100vh-96px)] sticky top-[96px]'>
         {wishlist.rooms.length > 0 && <MapBox rooms={wishlist.rooms} />}
       </section>
     </main>

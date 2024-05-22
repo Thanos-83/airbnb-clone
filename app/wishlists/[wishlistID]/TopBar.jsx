@@ -21,7 +21,7 @@ function TopBar({ wishlistInfo }) {
       className={`topBar flex-1 sticky top-[97px] flex items-center justify-between py-4 bg-white z-20`}>
       <button
         onClick={() => router.back()}
-        className='rounded-full hover:bg-black hover:bg-opacity-5 p-3'>
+        className='rounded-full hover:bg-black hover:bg-opacity-5 py-3'>
         <LiaAngleLeftSolid className='h-6 w-6' />
       </button>
       <div className='flex items-center gap-4'>

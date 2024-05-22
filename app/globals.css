@@ -278,8 +278,8 @@ body {
 
 .mapboxgl-popup {
   top: 20px !important;
-  width: 400px !important;
-  max-width: 440px !important;
+  width: 300px !important;
+  max-width: 340px !important;
 }
 
 .mapboxgl-popup-content {
@@ -303,12 +303,13 @@ body {
 /* Pagination component styles */
 .pagination_container {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 1rem;
 }
 
 .pagination_container > li > a {
-  @apply block w-10 h-10 aspect-square flex items-center justify-center;
+  @apply w-10 h-10 aspect-square flex items-center justify-center;
 }
 
 .pagination_container > li:not(.break, .selected, .disabled) > a {
@@ -394,5 +395,13 @@ body {
   }
   100% {
     transform: translate(24px, 0);
+  }
+}
+
+/* wishlists styles */
+
+@media (pointer: coarse) {
+  .delete_wishlist_btn {
+    display: block;
   }
 }
