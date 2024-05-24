@@ -115,7 +115,7 @@ function Categories() {
     <Container fluid={pathname === '/search'}>
       <div className='flex items-center justify-center gap-8'>
         <div className='overflow-x-auto no-scrollbar'>
-          <div className='flex items-center gap-10  w-max'>
+          <div className='flex items-center gap-4 md:gap-10  w-max'>
             {categories?.map(({ label, icon }) => (
               // <div key={label} className='flex flex-col items-center'>
               //   <Icon size={26}/>
@@ -125,7 +125,7 @@ function Categories() {
             ))}
           </div>
         </div>
-        <div>
+        <div className='hidden md:block'>
           <button className='flex p-4 items-center gap-4 border border-[#dddddd] rounded-xl text-[#222222]'>
             {' '}
             <HiOutlineAdjustmentsHorizontal size={26} className='' />{' '}

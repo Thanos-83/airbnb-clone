@@ -18,7 +18,7 @@ function TopBar({ wishlistInfo }) {
   // console.log('Header Height: ', headerHeight);
   return (
     <div
-      className={`topBar flex-1 sticky top-[97px] flex items-center justify-between py-4 bg-white z-20`}>
+      className={`topBar flex-1 sticky top-0 sm:top-[95px] flex items-center justify-between py-4 px-4 sm:px-0 bg-white z-20`}>
       <button
         onClick={() => router.back()}
         className='rounded-full hover:bg-black hover:bg-opacity-5 py-3'>

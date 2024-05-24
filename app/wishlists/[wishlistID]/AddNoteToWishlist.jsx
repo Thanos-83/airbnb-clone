@@ -53,7 +53,7 @@ export function AddNoteToWishlist({ house, wishlistID, roomID }) {
     <>
       <Dialog open={open} onOpenChange={handleToogleModal}>
         <DialogTrigger asChild>
-          <button className='text-[#717171] hover:text-[#222222] font-semibold text-lg underline'>
+          <button className='bg-[#F7F7F7] text-[#717171] p-4 rounded-xl hover:text-[#222222] font-semibold text-lg underline w-full text-left'>
             Add note
           </button>
         </DialogTrigger>

@@ -21,13 +21,13 @@ async function SingleWishlist({ params }) {
   // console.log('Single Wishlist: ', typeof wishlist.rooms[0]);
   return (
     <main className='flex gap-8 items-start'>
-      <section className='w-full lg:w-[60%] xl:w-[50%] 2xl:w-[60%] 4xl:w-[40%] px-4 lg:pl-8 pb-12'>
+      <section className='w-full px-0 sm:px-4 lg:w-[60%] xl:w-[50%] 2xl:w-[60%] 4xl:w-[40%] lg:pl-8 pb-12'>
         <TopBar wishlistInfo={wishlist} />
-        <h1 className='mb-8 text-3xl font-semibold text-[#222222]'>
+        <h1 className='mb-4 lg:mb-8 px-4 sm:px-0 text-3xl font-semibold text-[#222222]'>
           {wishlist.wishlistName}
         </h1>
         <BookingActions />
-        <div className='my-12 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 2xl:grid-cols-3 gap-8'>
+        <div className='px-4 sm:px-0 my-12 grid xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 2xl:grid-cols-3 gap-8'>
           {wishlist.rooms.length > 0 ? (
             wishlist.rooms.map((room) => (
               <WishlistItem
