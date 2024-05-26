@@ -16,6 +16,7 @@ import { toast } from 'sonner';
 import Image from 'next/image';
 import Link from 'next/link';
 import { updateRoomNote } from '@/app/_actions/actions';
+import { Loader2 } from 'lucide-react';
 
 export function EditNote({ house, wishlistID, roomID }) {
   const {
@@ -26,7 +27,7 @@ export function EditNote({ house, wishlistID, roomID }) {
     getValues,
   } = useForm();
   const [open, setOpen] = useState(false);
-  const [noteLength, setNoteLength] = useState(0);
+  const [noteLength, setNoteLength] = useState(house.note.length);
   const [noteValue, setNoteValue] = useState(house.note);
   const handleToogleModal = () => {
     setOpen(!open);
@@ -38,11 +39,12 @@ export function EditNote({ house, wishlistID, roomID }) {
     console.log('Response from server action: ', response);
     if (response) {
       setNoteValue(response.roomNote);
+      setNoteLength(response.roomNote.length);
     }
     reset();
     setOpen(false);
     // setSettingsOpen(false);
-    toast.success(`Note added successfuly!`, {
+    toast.success(`Note updated successfuly!`, {
       position: 'bottom-left',
     });
     setNoteLength(0);
@@ -50,15 +52,15 @@ export function EditNote({ house, wishlistID, roomID }) {
 
   const handleCancel = () => {
     reset();
-    setOpen(false);
+    setNoteValue(house.note);
+    setNoteLength(house.note.length);
   };
 
   const handleNote = (e) => {
     setNoteLength(e.target.value.length);
     setNoteValue(e.target.value);
   };
-  //   console.log('Note Value: ', noteValue);
-  //   console.log('Default Note: ', house.note);
+
   return (
     <>
       <Dialog open={open} onOpenChange={handleToogleModal}>
@@ -172,19 +174,23 @@ export function EditNote({ house, wishlistID, roomID }) {
             <Button
               type='button'
               onClick={() => handleCancel()}
-              className='py-[1.75rem] rounded-lg text-lg px-4 font-[600] bg-white text-[#222222] hover:bg-slate-100'>
+              disabled={noteValue === house.note}
+              className='py-[1.75rem] w-[120px] rounded-lg text-lg px-4 font-[600] bg-white text-[#222222] hover:bg-slate-100'>
               Cancel
             </Button>
             <Button
               form='add-note'
-              className={`py-[1.75rem] rounded-lg text-lg px-10 font-[600] ${
+              className={`py-[1.75rem] w-[120px] rounded-lg text-lg px-10 font-[600] ${
                 house.note === noteValue &&
                 'pointer-events-none cursor-not-allowed	 bg-slate-200'
               }`}
               type='submit'
-              // disabled={noteLength === 0}
-            >
-              {isSubmitting ? 'Editing' : 'Edit'}
+              disabled={isSubmitting}>
+              {isSubmitting ? (
+                <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+              ) : (
+                'Edit'
+              )}
             </Button>
           </div>
         </DialogContent>

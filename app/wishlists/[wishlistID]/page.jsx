@@ -23,7 +23,7 @@ async function SingleWishlist({ params }) {
     <main className='flex gap-8 items-start'>
       <section className='w-full px-0 sm:px-4 lg:w-[60%] xl:w-[50%] 2xl:w-[60%] 4xl:w-[40%] lg:pl-8 pb-12'>
         <TopBar wishlistInfo={wishlist} />
-        <h1 className='mb-4 lg:mb-8 px-4 sm:px-0 text-3xl font-semibold text-[#222222]'>
+        <h1 className='mb-4 lg:mb-8 px-4 sm:px-0 text-2xl xl:text-3xl font-semibold text-[#222222]'>
           {wishlist.wishlistName}
         </h1>
         <BookingActions />

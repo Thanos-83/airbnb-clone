@@ -22,11 +22,11 @@ function TopBar({ wishlistInfo }) {
       <button
         onClick={() => router.back()}
         className='rounded-full hover:bg-black hover:bg-opacity-5 py-3'>
-        <LiaAngleLeftSolid className='h-6 w-6' />
+        <LiaAngleLeftSolid className='h-4 w-4 lg:h-6 lg:w-6' />
       </button>
       <div className='flex items-center gap-4'>
         <button className='rounded-full hover:bg-black hover:bg-opacity-5 p-3'>
-          <PiUploadSimpleBold className='h-6 w-6' />
+          <PiUploadSimpleBold className='h-4 w-4 lg:h-6 lg:w-6' />
         </button>
         <WishlistSettings wishlistInfo={wishlistInfo} />
       </div>

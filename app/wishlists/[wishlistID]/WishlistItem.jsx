@@ -84,7 +84,7 @@ function WishlistItem({ house, wishlist }) {
       <div className='block sm:hidden mt-4'>
         {house?.note !== '' ? (
           <div className='bg-[#F7F7F7] text-[#717171] p-4 rounded-xl'>
-            <p>{house.note}</p>
+            <p className='break-all'>{house.note}</p>
 
             <EditNoteMobile
               house={house}

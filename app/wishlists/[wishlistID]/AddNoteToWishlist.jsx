@@ -16,6 +16,7 @@ import { toast } from 'sonner';
 import Image from 'next/image';
 import Link from 'next/link';
 import { updateRoomNote } from '@/app/_actions/actions';
+import { Loader2 } from 'lucide-react';
 
 export function AddNoteToWishlist({ house, wishlistID, roomID }) {
   const {
@@ -46,7 +47,9 @@ export function AddNoteToWishlist({ house, wishlistID, roomID }) {
 
   const handleCancel = () => {
     reset();
-    setOpen(false);
+    setNoteLength(0);
+
+    // setOpen(false);
   };
 
   return (
@@ -156,20 +159,24 @@ export function AddNoteToWishlist({ house, wishlistID, roomID }) {
           <div className='py-4 px-8 flex items-center justify-between'>
             <Button
               type='button'
+              disabled={noteLength === '' && true}
               onClick={() => handleCancel()}
-              className='py-[1.75rem] rounded-lg text-lg px-4 font-[600] bg-white text-[#222222] hover:bg-slate-100'>
+              className='py-[1.75rem] w-[120px] rounded-lg text-lg px-4 font-[600] bg-white text-[#222222] hover:bg-slate-100'>
               Cancel
             </Button>
             <Button
               form='add-note'
-              className={`py-[1.75rem] rounded-lg text-lg px-10 font-[600] ${
+              className={`py-[1.75rem] w-[120px] rounded-lg text-lg px-10 font-[600] ${
                 noteLength === 0 &&
                 'pointer-events-none cursor-not-allowed	 bg-slate-200'
               }`}
               type='submit'
-              // disabled={noteLength === 0}
-            >
-              {isSubmitting ? 'Saving' : 'Save'}
+              disabled={isSubmitting || noteLength === 0}>
+              {isSubmitting ? (
+                <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+              ) : (
+                'Save'
+              )}
             </Button>
           </div>
         </DialogContent>

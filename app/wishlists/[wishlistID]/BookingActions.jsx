@@ -12,7 +12,7 @@ function BookingActions() {
   }, []);
   return (
     <div
-      className={`sticky border-b border-b-[var(--secondary-gray)] sm:border-b-0 top-[78px] pt-2  sm:top-[170px] flex items-center gap-4 bg-white pb-2 md:pb-6 z-10`}>
+      className={`sticky border-b border-b-[var(--secondary-gray)] sm:border-b-0 top-[70px] pt-2  sm:top-[165px] lg:top-[170px] flex items-center gap-4 bg-white pb-2 md:pb-6 z-10`}>
       <button className='ml-4 sm:ml-0 py-[12px] px-[16px] border border-[#dddddd] bg-white rounded-full leading-5 text-[#222222]'>
         Add dates
       </button>

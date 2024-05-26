@@ -26,7 +26,7 @@ export function WishlistSettings({ wishlistInfo }) {
       <Dialog open={openSettings} onOpenChange={handleToogleSettingsModal}>
         <DialogTrigger asChild>
           <button className='rounded-full hover:bg-black hover:bg-opacity-5 p-3'>
-            <BsThreeDots className='h-6 w-6' />
+            <BsThreeDots className='h-4 w-4 lg:h-6 lg:w-6' />
           </button>
         </DialogTrigger>
         <DialogContent className='sm:max-w-[500px] p-4'>
