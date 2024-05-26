@@ -100,8 +100,8 @@ function EditNoteMobile({ house, wishlistID, roomID }) {
             Edit note
           </button>
         </DrawerTrigger>
-        <DrawerContent className='mt-0 top-0 h-fit'>
-          <div className='mx-auto w-full'>
+        <DrawerContent className='mt-0 top-0 h-[90vh] max-h-[330px] rounded-t-none rounded-b-[10px]'>
+          <div className='mx-auto w-full overflow-y-auto'>
             <DrawerHeader className='relative'>
               <DrawerClose asChild>
                 <button className='absolute top-4 left-4'>
