@@ -53,12 +53,13 @@ const Navbar = () => {
     <>
       <header
         className={`
-        ${pathname.split('/').includes('rooms') && 'hidden'} 
+        ${pathname.split('/').includes('rooms') && 'hidden md:block'} 
         ${pathname.split('/').includes('wishlists') && 'hidden sm:block'} 
-        ${pathname.split('/')[1] !== 'rooms' && 'sticky top-0'} 
         w-full bg-white z-50 border-bottom border-[#f7f7f7]`}>
         <div className='py-4 border-b-[1px]'>
-          <Container fluid={pathname === '/search' || inWishlist}>
+          <Container
+            small={pathname.split('/').includes('rooms')}
+            fluid={pathname === '/search' || inWishlist}>
             <div className='hidden sm:flex items-center gap-3 justify-between'>
               <Logo />
               <div className='flex-1 max-w-[900px] hidden sm:block'>

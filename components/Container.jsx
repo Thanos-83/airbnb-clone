@@ -1,6 +1,6 @@
 'use client';
 
-const Container = ({ children, medium, large, fluid }) => {
+const Container = ({ children, small, medium, large, fluid }) => {
   return (
     <div
       className={`${
@@ -10,8 +10,10 @@ const Container = ({ children, medium, large, fluid }) => {
           ? 'max-w-[1920px]'
           : fluid
           ? 'max-w-full'
+          : small
+          ? 'max-w-[1200px]'
           : 'max-w-[1536px]'
-      } mx-auto px-4 lg:px-8 `}>
+      } mx-auto  px-4 lg:px-8`}>
       {children}
     </div>
   );

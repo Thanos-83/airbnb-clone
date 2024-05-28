@@ -16,7 +16,7 @@ function FavouriteButton({ favourite, roomID, wishlists, favouriteInfo }) {
           favourite={true}
           wishlistID={favourite.wishlist_id}
           roomID={roomID}>
-          Saved
+          <span className='hidden md:inline-block'>Saved</span>
         </LikeButton>
       ) : wishlists && wishlists.length > 0 ? (
         <WishlistsDialog

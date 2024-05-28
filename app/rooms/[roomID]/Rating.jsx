@@ -15,14 +15,20 @@ function Rating({ reviewLabel, reviewScore, Icon, inDialog }) {
             ? 'flex-1 flex-col lg:justify-between lg:ml-4 lg:flex-row lg:items-center'
             : 'flex-col'
         } flex  gap-1`}>
-        <p className={`font-medium ${inDialog ? 'text-lg' : 'text-xl'}`}>
+        <p
+          className={`font-medium break-words ${
+            inDialog ? 'text-sm' : 'text-xs xl:text-sm'
+          }`}>
           {reviewLabel}
         </p>
-        <span className={`font-medium ${inDialog ? 'text-lg' : 'text-xl'}`}>
+        <span
+          className={`font-medium ${
+            inDialog ? 'text-sm' : 'text-xs xl:text-sm'
+          }`}>
           {Number(reviewScore / 2).toFixed(1)}
         </span>
       </div>
-      <Icon />
+      <Icon className='w-8 h-8' />
     </div>
   );
 }

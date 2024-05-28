@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 
 import {
   Drawer,
@@ -33,7 +33,6 @@ function EditNoteMobile({ house, wishlistID, roomID }) {
   const [noteLength, setNoteLength] = useState(house.note.length);
   const [noteValue, setNoteValue] = useState(house.note);
   const [open, setOpen] = useState(false);
-  const drawerRef = useRef();
 
   const handleEditNote = async (data) => {
     console.log('Data: ', data);
@@ -64,37 +63,9 @@ function EditNoteMobile({ house, wishlistID, roomID }) {
     setNoteValue(e.target.value);
   };
 
-  // useEffect(() => {
-  //   function onVisualViewportChange() {
-  //     const visualViewportHeight = window.visualViewport.height;
-  //     const keyboardHeight = window.innerHeight - visualViewportHeight;
-
-  //     // Difference between window height and height excluding the keyboard
-  //     const diffFromInitial = window.innerHeight - visualViewportHeight;
-
-  //     const drawerHeight =
-  //       drawerRef.current.getBoundingClientRect().height || 0;
-
-  //     drawerRef.current.style.height = `${visualViewportHeight - OFFSET}px`;
-  //     drawerRef.current.style.bottom = `${Math.max(diffFromInitial, 0)}px`;
-  //   }
-
-  //   window.visualViewport?.addEventListener('resize', onVisualViewportChange);
-
-  //   return () =>
-  //     window.visualViewport?.removeEventListener(
-  //       'resize',
-  //       onVisualViewportChange
-  //     );
-  // }, []);
-
   return (
     <div>
-      <Drawer
-        direction='top'
-        ref={drawerRef}
-        open={open}
-        onOpenChange={setOpen}>
+      <Drawer direction='top' open={open} onOpenChange={setOpen}>
         <DrawerTrigger asChild>
           <button className='text-[#717171] hover:text-[#222222] font-semibold text-lg underline'>
             Edit note

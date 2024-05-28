@@ -26,7 +26,7 @@ export function ReviewsDialogMobile({ reviewScores, reviews, isMobile }) {
   return (
     <Drawer>
       <DrawerTrigger asChild>
-        <button className='w-full block md:hidden text-black text-xl py-4 px-6 border rounded-lg border-[#222222] bg-white hover:bg-[#F7F7F7] hover:border-black mt-12'>
+        <button className='w-full hidden text-black text-xl py-4 px-6 border rounded-lg border-[#222222] bg-white hover:bg-[#F7F7F7] hover:border-black mt-6'>
           Show all {reviews.length} reviews
         </button>
       </DrawerTrigger>

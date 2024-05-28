@@ -33,7 +33,7 @@ function LikeButton({ children, setOpen, favourite, wishlistID, roomID }) {
       className={`${
         pathname !== `/rooms/${roomID}`
           ? 'absolute top-3 right-4'
-          : 'flex items-center gap-3 rounded-xl font-semibold underline hover:bg-[#f7f7f7] p-3'
+          : 'flex items-center gap-3 rounded-full md:rounded-xl font-semibold underline hover:bg-[#f7f7f7] p-3'
       }`}>
       <svg
         xmlns='http://www.w3.org/2000/svg'
@@ -42,7 +42,9 @@ function LikeButton({ children, setOpen, favourite, wishlistID, roomID }) {
         strokeWidth={1.5}
         stroke='currentColor'
         className={`${
-          pathname !== `/rooms/${roomID}` ? 'w-10 h-10' : 'w-6 h-6'
+          pathname !== `/rooms/${roomID}`
+            ? 'w-10 h-10'
+            : 'w-4 h-4 md:h-6 md:w-6'
         }  ${
           favourite ? 'fill-[var(--primary-color)] ' : 'fill-black opacity-50 '
         }text-white`}>

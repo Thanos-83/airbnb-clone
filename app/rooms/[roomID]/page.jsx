@@ -9,6 +9,8 @@ import { TbGridDots } from 'react-icons/tb';
 import { PiDotOutlineBold } from 'react-icons/pi';
 import { FaStar } from 'react-icons/fa6';
 import { FaAngleRight } from 'react-icons/fa6';
+import { FaAngleLeft } from 'react-icons/fa6';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import FavouriteButton from './FavouriteButton';
@@ -24,6 +26,7 @@ import { ReviewsDialogMobile } from './ReviewsDialogMobile';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import BookingWindow from './BookingWindow';
 import { fetchReservations } from '@/app/_actions/actions';
+import ImagesCarousel from './ImagesCarousel';
 
 export async function generateMetadata({ params }) {
   console.log('Metada params: ', params);
@@ -65,112 +68,131 @@ async function SingleRoom({ params }) {
 
   return (
     <div className='pb-16'>
-      <Container medium={true}>
-        <div className='flex items-center justify-between my-8'>
-          <h1 className='text-3xl font-semibold leading-7'>{room.name}</h1>
-          <div className='flex items-center gap-4'>
-            <button className='rounded-xl font-semibold underline flex items-center gap-3 hover:bg-[#f7f7f7] p-3'>
-              <PiUploadSimpleBold className='h-6 w-6' />
-              Share
+      <Container small={true}>
+        <div className='flex items-center justify-between my-4'>
+          <h1 className='hidden md:block text-lg xl:text-2xl font-semibold leading-7'>
+            {room.name}
+          </h1>
+          <Link
+            href='/'
+            className='md:hidden text-[0.875rem] font-semibold flex items-center gap-3'>
+            <FaAngleLeft className='w-4 h-4' />
+            <span>Homes</span>
+          </Link>
+          <div className='flex items-center '>
+            <button className='rounded-full md:rounded-xl font-semibold underline flex items-center gap-3 hover:bg-[#f7f7f7] p-3'>
+              <PiUploadSimpleBold className='w-4 h-4 md:h-6 md:w-6' />
+              <span className='hidden md:inline'>Share</span>
             </button>
-            {session && (
-              <FavouriteButton
-                favourite={
-                  userFavourites
-                    ? userFavourites.favourites.find(
-                        (favourite) => favourite.id === params.roomID
-                      )
-                    : null
-                }
-                roomID={params.roomID}
-                wishlists={wishlists ? wishlists.wishlists : []}
-                favouriteInfo={favouriteInfo}
+            {/* {session && ( */}
+            <FavouriteButton
+              favourite={
+                userFavourites
+                  ? userFavourites.favourites.find(
+                      (favourite) => favourite.id === params.roomID
+                    )
+                  : null
+              }
+              roomID={params.roomID}
+              wishlists={wishlists ? wishlists.wishlists : []}
+              favouriteInfo={favouriteInfo}
+            />
+            {/* )} */}
+          </div>
+        </div>
+      </Container>
+
+      {/* Images carousel in tablet views and below */}
+
+      <div className='block md:hidden'>
+        <ImagesCarousel image={room.images.picture_url} />
+      </div>
+
+      {/* Images grid in tablet and above */}
+      <div className='hidden md:block'>
+        <Container small={true}>
+          <div
+            id='roomPhotos'
+            className='roomImages relative rounded-xl overflow-hidden'>
+            <div className='roomImages_container relative col-start-1 col-end-3 row-span-full '>
+              <Image
+                src={room.images.picture_url}
+                // width={1000}
+                // height={300}
+                fill={true}
+                alt={room.name}
+                className='absolute inset-0 '
               />
-            )}
+            </div>
+            <div className='roomImages_container relative col-start-3 col-end-4 row-start-1 row-end-2'>
+              <Image
+                src={room.images.picture_url}
+                // width={1000}
+                // height={300}
+                fill={true}
+                alt={room.name}
+                className='absolute inset-0 '
+              />
+            </div>
+            <div className='roomImages_container relative col-start-4 col-end-5 row-start-1 row-end-2'>
+              <Image
+                src={room.images.picture_url}
+                // width={1000}
+                // height={300}
+                fill={true}
+                alt={room.name}
+                className='absolute inset-0 '
+              />
+            </div>
+            <div className='roomImages_container relative col-start-3 col-end-4 row-start-2 row-end-3'>
+              <Image
+                src={room.images.picture_url}
+                // width={1000}
+                // height={300}
+                fill={true}
+                alt={room.name}
+                className='absolute inset-0 '
+              />
+            </div>
+            <div className='roomImages_container relative col-start-4 col-end-5 row-start-2 row-end-3'>
+              <Image
+                src={room.images.picture_url}
+                // width={1000}
+                // height={300}
+                fill={true}
+                alt={room.name}
+                className='absolute inset-0 '
+              />
+            </div>
+            <button className='rounded-lg border border-black px-6 py-2 flex items-center gap-3 text-center absolute bottom-8 right-8 bg-white text-black font-semibold'>
+              <TbGridDots />
+              Show all photos
+            </button>
           </div>
-        </div>
-      </Container>
-      <Container medium={true}>
-        <div
-          id='roomPhotos'
-          className='roomImages relative rounded-xl overflow-hidden'>
-          <div className='roomImages_container relative col-start-1 col-end-3 row-span-full'>
-            <Image
-              src={room.images.picture_url}
-              // width={1000}
-              // height={300}
-              fill={true}
-              alt={room.name}
-              className='absolute inset-0 '
-            />
-          </div>
-          <div className='roomImages_container relative col-start-3 col-end-4 row-start-1 row-end-2'>
-            <Image
-              src={room.images.picture_url}
-              // width={1000}
-              // height={300}
-              fill={true}
-              alt={room.name}
-              className='absolute inset-0 '
-            />
-          </div>
-          <div className='roomImages_container relative col-start-4 col-end-5 row-start-1 row-end-2'>
-            <Image
-              src={room.images.picture_url}
-              // width={1000}
-              // height={300}
-              fill={true}
-              alt={room.name}
-              className='absolute inset-0 '
-            />
-          </div>
-          <div className='roomImages_container relative col-start-3 col-end-4 row-start-2 row-end-3'>
-            <Image
-              src={room.images.picture_url}
-              // width={1000}
-              // height={300}
-              fill={true}
-              alt={room.name}
-              className='absolute inset-0 '
-            />
-          </div>
-          <div className='roomImages_container relative col-start-4 col-end-5 row-start-2 row-end-3'>
-            <Image
-              src={room.images.picture_url}
-              // width={1000}
-              // height={300}
-              fill={true}
-              alt={room.name}
-              className='absolute inset-0 '
-            />
-          </div>
-          <button className='rounded-lg border border-black px-6 py-2 flex items-center gap-3 text-center absolute bottom-8 right-8 bg-white text-black font-semibold'>
-            <TbGridDots />
-            Show all photos
-          </button>
-        </div>
-      </Container>
+        </Container>
+      </div>
+
       <div className='hidden md:block z-10 sticky top-0'>
         <nav className=' bg-white  border-b border-b-[#dddddd]'>
-          <Container medium={true}>
+          <Container small={true}>
             <ul className='flex items-center gap-8'>
-              <li className='font-semibold text-xl '>
-                <Link href='#' className='py-8 inline-block'>
+              <li className='font-semibold text-[1rem] leading-6 '>
+                <Link href='#' className='py-4 inline-block'>
                   Photos
                 </Link>
               </li>
-              <li className='font-semibold text-xl'>
-                <Link href='#amenities' className='py-8 inline-block'>
+              <li className='font-semibold text-[1rem] leading-6'>
+                <Link href='#amenities' className='py-4 inline-block'>
                   Amenities
                 </Link>
               </li>
-              <li className='font-semibold text-xl'>
-                <Link href='#' className='py-8 inline-block'>
+              <li className='font-semibold text-[1rem] leading-6'>
+                <Link href='#' className='py-4 inline-block'>
                   Reviews
                 </Link>
               </li>
-              <li className='font-semibold text-xl'>
-                <Link href='#' className='py-8 inline-block'>
+              <li className='font-semibold text-[1rem] leading-6'>
+                <Link href='#' className='py-4 inline-block'>
                   Location
                 </Link>
               </li>
@@ -178,32 +200,35 @@ async function SingleRoom({ params }) {
           </Container>
         </nav>
       </div>
-      <Container medium={true}>
-        <div className='mt-12 mb-20 flex flex-col md:flex-row items-start gap-16'>
+      <Container small={true}>
+        <div className='mt-6 lg:mt-8 mb-12 flex flex-col md:flex-row items-start gap-8 md:gap-16'>
           <div className='w-full md:w-[60%]'>
-            <h2 className='text-[1rem] md:text-3xl font-semibold'>
+            <h1 className='md:hidden mb-2 text-2xl font-semibold leading-7'>
+              {room.name}
+            </h1>
+            <h2 className='text-[1rem] xl:text-xl font-semibold'>
               {room.room_type}
             </h2>
             <div className='flex flex-wrap items-center gap-1'>
-              <p className='text-sm md:text-[1.25rem] font-normal'>
+              <p className='text-sm md:text-[1rem] font-normal'>
                 {Number(room.accommodates)} guests
               </p>
               <span>
                 <PiDotOutlineBold />
               </span>
-              <p className='text-sm md:text-[1.25rem] font-normal'>
+              <p className='text-sm md:text-[1rem] font-normal'>
                 {Number(room.bedrooms)} bedrooms
               </p>
               <span>
                 <PiDotOutlineBold />
               </span>
-              <p className='text-sm md:text-[1.25rem] font-normal'>
+              <p className='text-sm md:text-[1rem] font-normal'>
                 {Number(room.beds)} beds
               </p>
               <span>
                 <PiDotOutlineBold />
               </span>
-              <p className='text-sm md:text-[1.25rem] font-normal'>
+              <p className='text-sm md:text-[1rem] font-normal'>
                 {Number(room.bathrooms)} bathrooms
               </p>
             </div>
@@ -239,7 +264,7 @@ async function SingleRoom({ params }) {
             </div>
             <div id='amenities' className='h-[1px] bg-[#DDDDDD]' />
             <div className='my-12'>
-              <h2 className='text-3xl font-semibold mb-4'>
+              <h2 className='text-lg xl:text-xl font-semibold mb-4'>
                 What this place offers
               </h2>
               <div>
@@ -252,13 +277,13 @@ async function SingleRoom({ params }) {
           </div>
         </div>
       </Container>
-      <Container medium={true}>
+      <Container small={true}>
         <div id='reviews' className='h-[1px] bg-[#DDDDDD]' />
       </Container>
       <div id='reviews' className='my-12'>
         {room.number_of_reviews > 0 ? (
-          <Container medium={true}>
-            <h2 className='text-3xl font-semibold mb-6 flex items-center'>
+          <Container small={true}>
+            <h2 className='text-lg xl:text-xl font-semibold mb-2 flex items-center'>
               <FaStar className='w-8 h-8 mr-2' />
               {Number(
                 (room.review_scores.review_scores_rating / 2) * 0.1
@@ -270,7 +295,7 @@ async function SingleRoom({ params }) {
             </h2>
           </Container>
         ) : (
-          <Container medium={true}>
+          <Container small={true}>
             <p className='font-semibold text-3xl'>No reviews (yet)</p>
           </Container>
         )}
@@ -278,28 +303,24 @@ async function SingleRoom({ params }) {
         {room.number_of_reviews > 0 && (
           <>
             <div className='hidden md:block mb-12'>
-              <Container medium={true}>
+              <Container small={true}>
                 <Ratings inDialog={false} reviewScores={room.review_scores} />
-                {/* <ScrollArea className='reviews_drawer_scores'>
-                  <Ratings inDialog={false} reviewScores={room.review_scores} />
-                  <ScrollBar orientation='horizontal' />
-                </ScrollArea> */}
               </Container>
             </div>
-            <Container medium={true}>
+            <Container small={true}>
               <div className='hidden md:block h-[1px] bg-[#DDDDDD]' />
             </Container>
-            <div className='my-12'>
+            <div className='my-4'>
               <div className='md:hidden'>
                 <Reviews inDialog={false} reviews={room.reviews} />
               </div>
               <div className='hidden md:block'>
-                <Container medium={true}>
+                <Container small={true}>
                   <Reviews inDialog={false} reviews={room.reviews} />
                 </Container>
               </div>
               {room.number_of_reviews > 6 && (
-                <Container medium={true}>
+                <Container small={true}>
                   <ReviewsDialog
                     reviewScores={room.review_scores}
                     reviews={room.reviews}
@@ -317,10 +338,10 @@ async function SingleRoom({ params }) {
           </>
         )}
       </div>
-      <Container medium={true}>
+      <Container small={true}>
         <div id='location' className='h-[1px] bg-[#DDDDDD]' />
         <div className='my-12 w-full h-[40rem] aspect-video'>
-          <h2 className='text-3xl font-semibold mb-4'>
+          <h2 className='text-lg xl:text-xl font-semibold mb-4'>
             Where you &apos;ll be{' '}
           </h2>
           <LocationBox coordinates={room.address.location.coordinates} />

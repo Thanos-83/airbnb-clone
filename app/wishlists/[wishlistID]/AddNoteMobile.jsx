@@ -59,14 +59,14 @@ function AddNoteMobile({ house, wishlistID, roomID }) {
 
   return (
     <div>
-      <Drawer open={open} onOpenChange={setOpen}>
+      <Drawer direction='top' open={open} onOpenChange={setOpen}>
         <DrawerTrigger asChild>
           <button className='text-[#717171] hover:text-[#222222] font-semibold text-lg underline text-left'>
             Add note
           </button>
         </DrawerTrigger>
-        <DrawerContent className='mt-0'>
-          <div className='mx-auto w-full'>
+        <DrawerContent className='mt-0 top-0 h-[90vh] max-h-[330px] rounded-t-none rounded-b-[10px]'>
+          <div className='mx-auto w-full overflow-y-auto'>
             <DrawerHeader className='relative'>
               <DrawerClose asChild>
                 <button className='absolute top-4 left-4'>
@@ -75,7 +75,7 @@ function AddNoteMobile({ house, wishlistID, roomID }) {
               </DrawerClose>
               <DrawerTitle>Notes</DrawerTitle>
             </DrawerHeader>
-            <div className='p-4 flex flex-col h-full'>
+            <div className='p-4 flex flex-co'>
               <form
                 className='flex-1 flex flex-col'
                 id='add-note'
@@ -94,7 +94,7 @@ function AddNoteMobile({ house, wishlistID, roomID }) {
                   name='note'
                   id='note'
                   rows={4}
-                  className='h-full bg-[#F7F7F7] border-[#b0b0b0] border-2 rounded-lg'
+                  className='bg-[#F7F7F7] border-[#b0b0b0] border-2 rounded-lg'
                   //   onChange={(e) => setNoteLength(e.target.value.length)}
                   onChange={(e) => handleNote(e)}
                 />

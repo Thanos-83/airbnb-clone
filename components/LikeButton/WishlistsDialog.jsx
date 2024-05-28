@@ -64,7 +64,9 @@ export function WishlistsDialog({ info, wishlists }) {
     <Dialog open={openWishlists} onOpenChange={handleToogleModal}>
       {/* <DialogTrigger asChild> */}
       <LikeButton setOpen={setWishlistsOpen} favourite={false} roomID={info.id}>
-        {pathname === `/rooms/${info.id}` && 'Save'}
+        {pathname === `/rooms/${info.id}` && (
+          <span className='hidden md:inline-block'>Save</span>
+        )}
       </LikeButton>
 
       {/* </DialogTrigger> */}
