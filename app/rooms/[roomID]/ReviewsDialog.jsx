@@ -35,7 +35,7 @@ export function ReviewsDialog({ reviewScores, reviews, isMobile }) {
   const handleToogleModal = () => {
     setOpen(!open);
   };
-
+  console.log('Search Review: ', searchReview);
   return (
     <>
       <Dialog open={open} onOpenChange={handleToogleModal}>
@@ -44,8 +44,8 @@ export function ReviewsDialog({ reviewScores, reviews, isMobile }) {
             Show all {reviews.length} reviews
           </button>
         </DialogTrigger>
-        <DialogContent className=' max-w-[95%] md:max-w-[1032px] rounded-md h-[95vh] md:h-[80vh] p-0 overflow-hidden'>
-          <div className='hidden px-10 py-10 md:flex flex-col lg:flex-row gap-6'>
+        <DialogContent className='max-w-[95%] md:max-w-[85%] lg:max-w-[1060px] rounded-md h-[95dvh] md:h-[85dvh] p-0 overflow-hidden'>
+          <div className='hidden px-10 py-10 lg:flex  lg:flex-row gap-6'>
             <div className='lg:w-[40%] lg:h-full'>
               <ScrollArea className='hidden lg:block  reviews_dialog_scores w-full'>
                 <Ratings inDialog={true} reviewScores={reviewScores} />
@@ -112,9 +112,9 @@ function MobileReviews({
   reviewScores,
 }) {
   return (
-    <div className='md:hidden px-6 py-10'>
-      <ScrollArea className='no-scrollbar h-[calc(90vh-40px)] '>
-        <div className='w-[calc(95vw-50px)] mb-4'>
+    <div className='block lg:hidden px-6 py-10 overflow-hidden'>
+      <ScrollArea className='no-scrollbar h-[calc(90vh-40px)] md:h-[calc(90vh-80px)] '>
+        <div className='w-[calc(95vw-3.15rem)] md:w-[calc(85vw-3.15rem)] mb-4'>
           <Ratings inDialog={true} reviewScores={reviewScores} />
         </div>
         <div className='mb-8'>

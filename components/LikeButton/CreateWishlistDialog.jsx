@@ -15,6 +15,7 @@ import { useForm } from 'react-hook-form';
 import { handleWishlistAction } from '@/app/_actions/actions';
 import { toast } from 'sonner';
 import { usePathname } from 'next/navigation';
+import { Loader2 } from 'lucide-react';
 
 export function CreateWishlistDialog({ asButton, favouriteInfo }) {
   const {
@@ -60,15 +61,15 @@ export function CreateWishlistDialog({ asButton, favouriteInfo }) {
             <LikeButton setOpen={setOpen} favourite={false} />
           )}
         </DialogTrigger>
-        <DialogContent className='sm:max-w-[640px] p-0'>
+        <DialogContent className='w-[90%] rounded-lg sm:max-w-[640px] p-0'>
           <DialogHeader asChild>
             <h2 className='p-4 text-xl text-center text-[#222222] font-[600]'>
-              Create Wishlist : House ID
+              Create Wishlist
             </h2>
           </DialogHeader>
           <hr className='h-[2px] bg-slate-100' />
           <form onSubmit={handleSubmit(handleWishlist)}>
-            <div className='py-4 px-8'>
+            <div className='py-4 px-4 sm:px-8'>
               <div className=''>
                 <Label htmlFor='name' className='text-right sr-only'>
                   Wishlist Name
@@ -103,13 +104,18 @@ export function CreateWishlistDialog({ asButton, favouriteInfo }) {
             <div className='py-4 px-8 flex items-center justify-between'>
               <Button
                 onClick={() => reset()}
-                className='py-[1.75rem] rounded-lg text-lg px-4 font-[600] bg-white text-[#222222] hover:bg-slate-100'>
+                className='py-[1.75rem] w-[120px] rounded-lg text-lg px-4 font-[600] bg-white text-[#222222] hover:bg-slate-100'>
                 Clear
               </Button>
               <Button
-                className='py-[1.75rem] rounded-lg text-lg px-10 font-[600]'
-                type='submit'>
-                {isSubmitting ? 'Creating' : 'Create'}
+                className='py-[1.75rem] w-[120px] rounded-lg text-lg px-10 font-[600]'
+                type='submit'
+                disabled={isSubmitting}>
+                {isSubmitting ? (
+                  <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+                ) : (
+                  'Create'
+                )}
               </Button>
             </div>
           </form>

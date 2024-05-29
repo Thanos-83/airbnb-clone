@@ -2,13 +2,14 @@ import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { FaStar } from 'react-icons/fa6';
 import { PiDotOutlineBold } from 'react-icons/pi';
+import moment from 'moment';
 
 function Review({ review, inDialog, isMobile }) {
   return (
     <div
       className={`${
         !isMobile && 'rounded-xl shadow-xl p-6 mt-4 mb-8'
-      } md:rounded-none md:shadow-none md:p-0  flex flex-col ${
+      } md:rounded-none md:shadow-none md:p-0  md:flex md:flex-col ${
         inDialog ? 'mb-6' : 'md:my-0'
       }`}>
       <div
@@ -33,7 +34,7 @@ function Review({ review, inDialog, isMobile }) {
           <FaStar />
         </span>
         <PiDotOutlineBold className='w-2 h-2' />
-        <p>{review.date.$date}</p>
+        <p>{moment(review.date.$date).format('LLL')}</p>
       </div>
       <div>
         <p className={`${!inDialog && 'line-clamp-3'}`}>{review.comments}</p>

@@ -29,7 +29,7 @@ export function WishlistSettings({ wishlistInfo }) {
             <BsThreeDots className='h-4 w-4 lg:h-6 lg:w-6' />
           </button>
         </DialogTrigger>
-        <DialogContent className='sm:max-w-[500px] p-4'>
+        <DialogContent className='w-[90%] rounded-lg sm:max-w-[500px] p-4'>
           <DialogHeader asChild>
             <h2 className=' text-xl text-center text-[#222222] font-[600]'>
               Settings

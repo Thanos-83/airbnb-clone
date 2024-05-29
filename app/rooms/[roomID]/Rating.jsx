@@ -1,7 +1,7 @@
 'use client';
 
 function Rating({ reviewLabel, reviewScore, Icon, inDialog }) {
-  console.log(Icon);
+  // console.log(Icon);
   return (
     <div
       className={`${

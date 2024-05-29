@@ -7,6 +7,7 @@ import {
   DialogHeader,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 import LikeButton from './LikeButton';
 import { CreateWishlistDialog } from './CreateWishlistDialog';
@@ -70,14 +71,14 @@ export function WishlistsDialog({ info, wishlists }) {
       </LikeButton>
 
       {/* </DialogTrigger> */}
-      <DialogContent className='sm:max-w-[640px] p-0'>
+      <DialogContent className='w-[90%] block rounded-lg max-h-[90dvh] max-h-[90vh] h-fit sm:max-w-[740px] overflow-y-auto p-0'>
         <div>
           <h2 className='p-4 text-xl text-center text-[#222222] font-[600]'>
             Add to Wishlist
           </h2>
         </div>
         <hr className='h-[2px] bg-slate-100' />
-        <div className='max-h-[400px] overflow-y-auto px-8 grid items-start grid-cols-2 gap-4'>
+        <div className='no-scrollbar max-h-[700px]  py-4 overflow-y-auto px-4 sm:px-8 grid items-start grid-cols-2 xl:grid-cols-3 gap-4'>
           {wishlists.map((wishlist) => (
             <button
               aria-label='add favourite to wishlist'
@@ -88,7 +89,7 @@ export function WishlistsDialog({ info, wishlists }) {
             </button>
           ))}
         </div>
-        <hr className='h-[2px] mt-4 bg-sl ate-100' />
+        <hr className='h-[2px] mt-4 bg-slate-100' />
         <div className='py-4 px-8 flex items-center justify-between'>
           <CreateWishlistDialog
             setWishlistsOpen={setWishlistsOpen}

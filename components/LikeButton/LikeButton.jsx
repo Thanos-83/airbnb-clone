@@ -21,7 +21,11 @@ function LikeButton({ children, setOpen, favourite, wishlistID, roomID }) {
     }
 
     if (favourite) {
-      alert(`Room ID: ${roomID} - Wishlist ID: ${wishlistID}`);
+      // const deleteRoom = prompt(
+      //   `Are you sure you want to remove thw room from the  Wishlist`
+      // );
+      // console.log(deleteRoom);
+
       const data = { wishlistID, roomID };
       removeFavourite(data);
     }
@@ -42,9 +46,7 @@ function LikeButton({ children, setOpen, favourite, wishlistID, roomID }) {
         strokeWidth={1.5}
         stroke='currentColor'
         className={`${
-          pathname !== `/rooms/${roomID}`
-            ? 'w-10 h-10'
-            : 'w-4 h-4 md:h-6 md:w-6'
+          pathname !== `/rooms/${roomID}` ? 'w-10 h-10' : 'w-6 h-6'
         }  ${
           favourite ? 'fill-[var(--primary-color)] ' : 'fill-black opacity-50 '
         }text-white`}>

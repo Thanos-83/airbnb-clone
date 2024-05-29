@@ -137,19 +137,15 @@ body {
   object-fit: inherit;
 }
 
-.singleRoom_carousel_container {
-  height: 60vh;
-}
-
 @media screen and (max-width: 540px) {
   .singleRoom_carousel_container {
-    height: 30vh;
+    height: 40vh;
   }
 }
 
 @media screen and (min-width: 541px) {
   .singleRoom_carousel_container {
-    height: 40vh;
+    height: 45vh;
   }
 }
 
@@ -171,7 +167,7 @@ body {
 @media screen and (max-width: 768px) {
   .reviews_container {
     grid-auto-flow: column;
-    grid-auto-columns: 80%;
+    grid-auto-columns: 90%;
     overflow-x: auto;
     overscroll-behavior-inline: contain;
     scroll-snap-type: inline mandatory;
@@ -229,7 +225,7 @@ body {
 @media screen and (min-width: 1024px) {
   .reviews_dialog_reviews,
   .reviews_dialog_scores {
-    height: calc(80vh - 6rem);
+    height: calc(80vh - 2rem);
   }
 }
 

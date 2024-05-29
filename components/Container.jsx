@@ -12,7 +12,7 @@ const Container = ({ children, small, medium, large, fluid }) => {
           ? 'max-w-full'
           : small
           ? 'max-w-[1200px]'
-          : 'max-w-[1536px]'
+          : 'max-w-[1400px]'
       } mx-auto  px-4 lg:px-8`}>
       {children}
     </div>

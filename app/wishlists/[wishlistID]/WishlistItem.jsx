@@ -14,7 +14,7 @@ function WishlistItem({ house, wishlist }) {
     <div className='flex flex-col '>
       <div className='flex-1'>
         <div className='rounded-xl flex-1 overflow-hidden aspect-square relative'>
-          <Link href={`/rooms/${house.id}`} target='_blank'>
+          <Link href={`/rooms/${house.id}`}>
             <Image
               src={house.image}
               width={600}

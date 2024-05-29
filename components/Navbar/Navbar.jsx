@@ -52,8 +52,10 @@ const Navbar = () => {
   return (
     <>
       <header
-        className={`
-        ${pathname.split('/').includes('rooms') && 'hidden md:block'} 
+        className={`sticky top-0
+        ${
+          pathname.split('/').includes('rooms') && 'hidden md:block md:relative'
+        } 
         ${pathname.split('/').includes('wishlists') && 'hidden sm:block'} 
         w-full bg-white z-50 border-bottom border-[#f7f7f7]`}>
         <div className='py-4 border-b-[1px]'>
@@ -83,7 +85,7 @@ const Navbar = () => {
         </div>
         {(pathname === '/' || pathname === '/search') && <Categories />}
       </header>
-      <div
+      <header
         className={`border-t border-t-[#EBEBEB] shadow shadow-fuchsia-900 sm:hidden ${
           pathname.split('/').includes('rooms') ? 'hidden' : 'fixed'
         }  bottom-0 left-0 right-0 py-3 bg-white z-50 transition-transform duration-500 ease-in-out ${
@@ -102,8 +104,11 @@ const Navbar = () => {
           </Link>
           <Link
             href='/wishlists'
-            className={`flex flex-col items-center gap-1 text-[var(--primary-gray)] ${
-              pathname === '/wishlists' && 'text-[var(--primary-color)]'
+            className={`flex flex-col items-center gap-1  ${
+              pathname === '/wishlists' ||
+              pathname.split('/').includes('wishlists')
+                ? 'text-[var(--primary-color)]'
+                : 'text-[var(--primary-gray)]'
             }`}>
             <PiHeartLight className='w-6 h-6' />
             <span className='text-[0.625rem]'>Wishlist</span>
@@ -121,7 +126,7 @@ const Navbar = () => {
             <LoginModalMobile />
           )}
         </nav>
-      </div>
+      </header>
     </>
   );
 };

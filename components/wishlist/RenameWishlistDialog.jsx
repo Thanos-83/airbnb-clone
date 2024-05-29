@@ -16,6 +16,7 @@ import { toast } from 'sonner';
 import { MdModeEdit } from 'react-icons/md';
 import { LiaAngleRightSolid } from 'react-icons/lia';
 import { RiDeleteBin5Line } from 'react-icons/ri';
+import { Loader2 } from 'lucide-react';
 
 export function RenameWishlistDialog({ setSettingsOpen, wishlistInfo }) {
   const {
@@ -29,6 +30,7 @@ export function RenameWishlistDialog({ setSettingsOpen, wishlistInfo }) {
   const [nameLength, setNameLength] = useState(
     wishlistInfo.wishlistName.length
   );
+  const [wishlistName, setWishlistName] = useState(wishlistInfo.wishlistName);
   const handleToogleModal = () => {
     setOpen(!open);
   };
@@ -45,8 +47,14 @@ export function RenameWishlistDialog({ setSettingsOpen, wishlistInfo }) {
     });
   };
 
+  const handleRenameWishlist = (e) => {
+    setNameLength(e.target.value.length);
+    setWishlistName(e.target.value);
+  };
+
   const handleCancel = () => {
     reset();
+    setWishlistName(wishlistInfo.wishlistName);
     setOpen(false);
   };
 
@@ -62,7 +70,7 @@ export function RenameWishlistDialog({ setSettingsOpen, wishlistInfo }) {
             <LiaAngleRightSolid />
           </button>
         </DialogTrigger>
-        <DialogContent className='sm:max-w-[500px] p-0'>
+        <DialogContent className='w-[90%] rounded-lg sm:max-w-[500px] p-0'>
           <DialogHeader asChild>
             <h2 className='p-4 text-xl text-center text-[#222222] font-[600]'>
               Rename Wishlist
@@ -87,8 +95,8 @@ export function RenameWishlistDialog({ setSettingsOpen, wishlistInfo }) {
                   name='name'
                   id='name'
                   // onFocus={(e) => wishlistInfo.wishlistName.length}
-                  defaultValue={wishlistInfo.wishlistName}
-                  onChange={(e) => setNameLength(e.target.value.length)}
+                  defaultValue={wishlistName}
+                  onChange={(e) => handleRenameWishlist(e)}
                 />
                 <input
                   type='hidden'
@@ -115,13 +123,18 @@ export function RenameWishlistDialog({ setSettingsOpen, wishlistInfo }) {
               <Button
                 type='button'
                 onClick={() => handleCancel()}
-                className='py-[1.75rem] rounded-lg text-lg px-4 font-[600] bg-white text-[#222222] hover:bg-slate-100'>
+                className='py-[1.75rem] w-[125px] rounded-lg text-lg px-4 font-[600] bg-white text-[#222222] hover:bg-slate-100'>
                 Cancel
               </Button>
               <Button
-                className='py-[1.75rem] rounded-lg text-lg px-10 font-[600]'
-                type='submit'>
-                {isSubmitting ? 'Saving' : 'Save'}
+                className={`py-[1.75rem] w-[125px] rounded-lg text-lg px-10 font-[600] ${
+                  isSubmitting && 'cursor-not-allowed'
+                }`}
+                type='submit'
+                disabled={
+                  isSubmitting || wishlistName === wishlistInfo.wishlistName
+                }>
+                {isSubmitting ? <Loader2 /> : 'Save'}
               </Button>
             </div>
           </form>

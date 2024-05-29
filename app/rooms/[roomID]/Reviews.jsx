@@ -8,7 +8,14 @@ function Reviews({ reviews, inDialog, isMobile }) {
       {reviews.length > 6 && !inDialog
         ? reviews
             .slice(1, 7)
-            .map((review, index) => <Review review={review} key={index} />)
+            .map((review, index) => (
+              <Review
+                isMobile={isMobile}
+                inDialog={inDialog}
+                review={review}
+                key={index}
+              />
+            ))
         : reviews.map((review, index) => (
             <Review
               isMobile={isMobile}

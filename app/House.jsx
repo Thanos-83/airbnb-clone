@@ -24,7 +24,7 @@ function House({ house, wishlists, isFavourite, favourite }) {
     <div>
       <div className='rounded-xl overflow-hidden aspect-square relative'>
         {/* <p className='z-[999]'>{house._id}</p> */}
-        <Link href={`/rooms/${house._id}`} target='_blank'>
+        <Link href={`/rooms/${house._id}`}>
           <Image
             src={house.images.picture_url}
             width={600}

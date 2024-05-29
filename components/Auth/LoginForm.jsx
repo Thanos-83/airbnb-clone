@@ -65,7 +65,8 @@ function LoginForm() {
         <Button
           onClick={() => signIn('facebook')}
           className='w-full flex items-center py-6 font-bold text-lg'
-          variant='outline'>
+          variant='outline'
+          disabled>
           <FaFacebookSquare className='mr-2 h-6 w-6 text-[#4267B2]' />
           <p className='text-center flex-1'>Continue with Facebook</p>
         </Button>
@@ -79,7 +80,8 @@ function LoginForm() {
         <Button
           onClick={() => signIn('github')}
           className='w-full flex items-center py-6 font-bold text-lg'
-          variant='outline'>
+          variant='outline'
+          disabled>
           <FaGithub className='mr-2 h-6 w-6' />
           <p className='text-center flex-1'>Continue with GitHub</p>
         </Button>

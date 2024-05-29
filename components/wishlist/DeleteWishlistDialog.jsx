@@ -9,6 +9,7 @@ import { RiDoubleQuotesL } from 'react-icons/ri';
 import { RiDoubleQuotesR } from 'react-icons/ri';
 import { deleteWishlist } from '@/app/_actions/actions';
 import { useRouter } from 'next/navigation';
+import { Loader2 } from 'lucide-react';
 
 export function DeleteWishlistDialog({ wishlistInfo }) {
   const router = useRouter();
@@ -35,7 +36,7 @@ export function DeleteWishlistDialog({ wishlistInfo }) {
             <LiaAngleRightSolid />
           </button>
         </DialogTrigger>
-        <DialogContent className='sm:max-w-[500px] p-0'>
+        <DialogContent className='w-[90%] rounded-lg sm:max-w-[500px] p-0'>
           <div className='flex flex-col items-center text-center p-8 mt-8 max-w-[300px] mx-auto'>
             <h2 className='text-[#222222] font-semibold text-xl mb-2'>
               Delete this wishlist?
@@ -53,15 +54,18 @@ export function DeleteWishlistDialog({ wishlistInfo }) {
           <hr className='h-[2px] mt-4 bg-slate-100' />
           <div className='py-4 px-8 flex items-center justify-between'>
             <Button
-              className='py-[1.75rem] rounded-lg text-lg px-4 font-[600] bg-white text-[#222222] hover:bg-slate-100'
+              className='py-[1.75rem] w-[125px] rounded-lg text-lg px-4 font-[600] bg-white text-[#222222] hover:bg-slate-100'
               onClick={() => setOpen(false)}>
               Cancel
             </Button>
             <Button
               onClick={() => handleDeleteWishlist(wishlistInfo._id)}
-              className='py-[1.75rem] rounded-lg text-lg px-10 font-[600]'
-              type='submit'>
-              {isPending ? 'Deleting' : 'Delete'}
+              className={`py-[1.75rem] w-[125px] rounded-lg text-lg px-10 font-[600]  ${
+                isPending && 'cursor-not-allowed'
+              }`}
+              type='submit'
+              disabled={isPending}>
+              {isPending ? <Loader2 /> : 'Delete'}
             </Button>
           </div>
         </DialogContent>

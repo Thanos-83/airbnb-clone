@@ -29,7 +29,7 @@ function Houses({ houses, wishlists, userFavourites }) {
   // console.log('Entry: ', entry);
   return (
     <>
-      <div className='grid gap-4 md:gap-10 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4'>
+      <div className='grid gap-4 md:gap-6 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4'>
         {listings?.map((house) => (
           <House
             key={house._id}

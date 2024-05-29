@@ -41,7 +41,7 @@ function Search() {
         </div>
         <button
           onClick={() => searchResults()}
-          className='p-2 bg-rose-500 rounded-full text-white'>
+          className='flex items-center justify-center p-2 bg-rose-500 rounded-full w-12 h-12 text-white'>
           <BiSearch size={16} className='font-bold' />
         </button>
       </div>

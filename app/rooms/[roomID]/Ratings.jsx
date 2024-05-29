@@ -10,7 +10,7 @@ import Value from '@/svg/reviews/Value';
 import Rating from './Rating';
 
 function Ratings({ inDialog, reviewScores }) {
-  console.log('Review Scores: ', reviewScores);
+  // console.log('Review Scores: ', reviewScores);
   const ratingsData = [
     {
       score: reviewScores ? reviewScores.review_scores_cleanliness : 0,

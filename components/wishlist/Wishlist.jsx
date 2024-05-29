@@ -4,7 +4,7 @@ function Wishlist({ wishlist }) {
   // console.log('Wishlists: ', wishlist);
   return (
     <div>
-      <div className='aspect-square rounded-xl  border-[10px] border-white shadow-lg overflow-hidden'>
+      <div className='aspect-square rounded-xl border-[4px] lg:border-[10px] border-white shadow-lg overflow-hidden'>
         <Image
           className='object-cover rounded-xl h-full'
           src={`${

@@ -81,7 +81,7 @@ async function SingleRoom({ params }) {
           </Link>
           <div className='flex items-center '>
             <button className='rounded-full md:rounded-xl font-semibold underline flex items-center gap-3 hover:bg-[#f7f7f7] p-3'>
-              <PiUploadSimpleBold className='w-4 h-4 md:h-6 md:w-6' />
+              <PiUploadSimpleBold className='h-5 w-5' />
               <span className='hidden md:inline'>Share</span>
             </button>
             {/* {session && ( */}
@@ -257,7 +257,9 @@ async function SingleRoom({ params }) {
             </div>
             <div className='h-[1px] bg-[#DDDDDD]' />
             <div className='my-12'>
-              <p className='font-normal text-xl'>{room.summary}</p>
+              <p className='font-normal text-sm md:text-[1rem] xl:text-xl'>
+                {room.summary}
+              </p>
               <button className='mt-6 flex items-center gap-2 underline font-semibold text-[1rem] md:text-xl'>
                 Show more <FaAngleRight />
               </button>
@@ -277,17 +279,21 @@ async function SingleRoom({ params }) {
           </div>
         </div>
       </Container>
+
+      {/* Separator */}
       <Container small={true}>
         <div id='reviews' className='h-[1px] bg-[#DDDDDD]' />
       </Container>
+
+      {/* Reviews Section */}
       <div id='reviews' className='my-12'>
         {room.number_of_reviews > 0 ? (
           <Container small={true}>
-            <h2 className='text-lg xl:text-xl font-semibold mb-2 flex items-center'>
-              <FaStar className='w-8 h-8 mr-2' />
+            <h2 className='text-lg xl:text-xl font-semibold md:mb-6 flex items-center'>
+              <FaStar className='w-5 h-5 mr-2' />
               {Number(
                 (room.review_scores.review_scores_rating / 2) * 0.1
-              ).toFixed(1)}
+              ).toFixed(2)}
               <span>
                 <PiDotOutlineBold />
               </span>
@@ -310,7 +316,7 @@ async function SingleRoom({ params }) {
             <Container small={true}>
               <div className='hidden md:block h-[1px] bg-[#DDDDDD]' />
             </Container>
-            <div className='my-4'>
+            <div className='my-3 md:my-8'>
               <div className='md:hidden'>
                 <Reviews inDialog={false} reviews={room.reviews} />
               </div>
@@ -338,6 +344,8 @@ async function SingleRoom({ params }) {
           </>
         )}
       </div>
+
+      {/* Location Section*/}
       <Container small={true}>
         <div id='location' className='h-[1px] bg-[#DDDDDD]' />
         <div className='my-12 w-full h-[40rem] aspect-video'>
