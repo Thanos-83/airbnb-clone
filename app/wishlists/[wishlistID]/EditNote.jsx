@@ -74,14 +74,14 @@ export function EditNote({ house, wishlistID, roomID }) {
           </button>
         </div>
         {/* </DialogTrigger> */}
-        <DialogContent className='sm:max-w-[800px] p-0'>
+        <DialogContent className='gap-0 editNote_content   w-[80%] sm:max-w-[800px] p-0'>
           <DialogHeader asChild>
-            <h2 className='p-4 text-xl text-center text-[#222222] font-[600]'>
+            <h2 className='px-4 py-2 text-xl text-center text-[#222222] font-[600]'>
               Edit Note
             </h2>
           </DialogHeader>
-          <hr className='h-[2px] bg-slate-100' />
-          <div className='flex items-center gap-8 px-8 max-h-[400px] overflow-y-auto'>
+          <hr className='h-[2px] mb-4 bg-slate-100' />
+          <div className='flex items-center gap-8 px-8 max-h-[calc(90svh-200px)] overflow-y-auto'>
             <div className='rounded-xl overflow-hidden w-1/2'>
               <Link href={`/rooms/${house._id}`} target='_blank'>
                 <Image
@@ -93,7 +93,7 @@ export function EditNote({ house, wishlistID, roomID }) {
                 />
               </Link>
             </div>
-            <div className='flex flex-col h-full w-1/2'>
+            <div className='flex self-stretch flex-col h-full w-1/2'>
               <div className='flex items-start justify-between'>
                 <p className='text-[#222222] flex-1 font-[600] '>
                   {' '}
@@ -169,7 +169,7 @@ export function EditNote({ house, wishlistID, roomID }) {
               </form>
             </div>
           </div>
-          <hr className='h-[2px] bg-slate-100' />
+          <hr className='h-[2px] mt-4 bg-slate-100' />
           <div className='py-4 px-8 flex items-center justify-between'>
             <Button
               type='button'

@@ -36,7 +36,7 @@ export function DeleteWishlistDialog({ wishlistInfo }) {
             <LiaAngleRightSolid />
           </button>
         </DialogTrigger>
-        <DialogContent className='w-[90%] rounded-lg sm:max-w-[500px] p-0'>
+        <DialogContent className='max-h-[80svh] overflow-y-auto w-[90%]  rounded-lg sm:max-w-[500px] p-0'>
           <div className='flex flex-col items-center text-center p-8 mt-8 max-w-[300px] mx-auto'>
             <h2 className='text-[#222222] font-semibold text-xl mb-2'>
               Delete this wishlist?

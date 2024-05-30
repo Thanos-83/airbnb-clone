@@ -139,21 +139,21 @@ body {
 
 @media screen and (max-width: 540px) {
   .singleRoom_carousel_container {
-    height: 40vh;
+    height: 35vh;
   }
 }
 
 @media screen and (min-width: 541px) {
   .singleRoom_carousel_container {
-    height: 45vh;
+    height: 40vh;
   }
 }
 
-@media screen and (min-width: 640px) {
+/* @media screen and (min-width: 640px) {
   .singleRoom_carousel_container {
     height: 60vh;
   }
-}
+} */
 
 /* Reviews styling*/
 
@@ -443,6 +443,25 @@ body {
 }
 
 /* wishlists styles */
+
+.wishlists_container {
+  max-height: calc(80vh - 170px);
+  max-height: calc(80dvh - 170px);
+  max-height: calc(80svh - 170px);
+}
+
+.wishlists_content {
+  max-height: 80vh;
+  max-height: 80dvh;
+  max-height: 80svh;
+}
+
+.editNote_content,
+.addNote_content {
+  max-height: 90vh;
+  max-height: 90dvh;
+  max-height: 90svh;
+}
 
 @media (pointer: coarse) {
   .delete_wishlist_btn {

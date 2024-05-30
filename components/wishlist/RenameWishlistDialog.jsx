@@ -70,15 +70,17 @@ export function RenameWishlistDialog({ setSettingsOpen, wishlistInfo }) {
             <LiaAngleRightSolid />
           </button>
         </DialogTrigger>
-        <DialogContent className='w-[90%] rounded-lg sm:max-w-[500px] p-0'>
+        <DialogContent className='gap-0 max-h-[80svh] w-[90%] rounded-lg sm:max-w-[500px] p-0'>
           <DialogHeader asChild>
             <h2 className='p-4 text-xl text-center text-[#222222] font-[600]'>
               Rename Wishlist
             </h2>
           </DialogHeader>
-          <hr className='h-[2px] bg-slate-100' />
-          <form onSubmit={handleSubmit(handleWishlist)}>
-            <div className='py-4 px-8'>
+          <hr className='h-[2px] mb-4 bg-slate-100' />
+          <form
+            className='max-h-[calc(80svh-150px)] overflow-y-auto pt-2'
+            onSubmit={handleSubmit(handleWishlist)}>
+            <div className='px-8'>
               <div className=''>
                 <Label htmlFor='name' className='text-right sr-only'>
                   Wishlist Name

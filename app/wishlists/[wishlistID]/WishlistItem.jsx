@@ -65,7 +65,7 @@ function WishlistItem({ house, wishlist }) {
           </div>
         </div>
       </div>
-      <div className='hidden sm:block mt-4'>
+      <div className='hidden md:block mt-4'>
         {house.note !== '' ? (
           <EditNote
             house={house}
@@ -81,7 +81,7 @@ function WishlistItem({ house, wishlist }) {
         )}
       </div>
 
-      <div className='block sm:hidden mt-4'>
+      <div className='block md:hidden mt-4'>
         {house?.note !== '' ? (
           <div className='bg-[#F7F7F7] text-[#717171] p-4 rounded-xl'>
             <p className='break-all'>{house.note}</p>

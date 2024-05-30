@@ -60,14 +60,14 @@ export function AddNoteToWishlist({ house, wishlistID, roomID }) {
             Add note
           </button>
         </DialogTrigger>
-        <DialogContent className='sm:max-w-[800px] p-0'>
+        <DialogContent className='gap-0 addNote_content   w-[80%] sm:max-w-[800px] p-0'>
           <DialogHeader asChild>
             <h2 className='p-4 text-xl text-center text-[#222222] font-[600]'>
               Add Note
             </h2>
           </DialogHeader>
-          <hr className='h-[2px] bg-slate-100' />
-          <div className='flex items-center gap-8 px-8 max-h-[400px] overflow-y-auto'>
+          <hr className='h-[2px] mb-4 bg-slate-100' />
+          <div className='flex items-center gap-8 px-8 max-h-[calc(90svh-200px)] overflow-y-auto '>
             <div className='rounded-xl overflow-hidden w-1/2'>
               <Link href={`/rooms/${house._id}`} target='_blank'>
                 <Image
@@ -155,7 +155,7 @@ export function AddNoteToWishlist({ house, wishlistID, roomID }) {
               </form>
             </div>
           </div>
-          <hr className='h-[2px] bg-slate-100' />
+          <hr className='h-[2px] mt-4 bg-slate-100' />
           <div className='py-4 px-8 flex items-center justify-between'>
             <Button
               type='button'
