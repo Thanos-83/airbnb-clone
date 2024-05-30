@@ -61,7 +61,7 @@ export function CreateWishlistDialog({ asButton, favouriteInfo }) {
             <LikeButton setOpen={setOpen} favourite={false} />
           )}
         </DialogTrigger>
-        <DialogContent className='w-[90%] rounded-lg sm:max-w-[640px] p-0'>
+        <DialogContent className='w-[90%] rounded-lg sm:max-w-[740px] p-0'>
           <DialogHeader asChild>
             <h2 className='p-4 text-xl text-center text-[#222222] font-[600]'>
               Create Wishlist

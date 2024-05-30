@@ -47,17 +47,19 @@ export function WishlistsDialog({ info, wishlists }) {
             alt={wishlist.wishlistName}
           />
           <div className='flex-1 flex justify-between'>
-            <p className='text-lg'>
+            <p className='text-lg flex-1'>
               Saved to{' '}
               <span className='text-[#222222] font-semibold'>
                 {wishlist.wishlistName}
               </span>
             </p>
-            <button onClick={() => toast.dismiss(t)}>close</button>
+            <button className='w-[60px]' onClick={() => toast.dismiss(t)}>
+              close
+            </button>
           </div>
         </div>
       ),
-      { duration: 10000, position: 'bottom-left' }
+      { duration: 5000, position: 'bottom-left' }
     );
   };
 
@@ -71,14 +73,14 @@ export function WishlistsDialog({ info, wishlists }) {
       </LikeButton>
 
       {/* </DialogTrigger> */}
-      <DialogContent className='w-[90%] block rounded-lg max-h-[90dvh] h-[90vh] sm:max-w-[740px] overflow-y-auto p-0'>
+      <DialogContent className='w-[90%] block rounded-lg max-h-[90svh] sm:max-w-[740px] overflow-y-auto p-0'>
         <div>
           <h2 className='p-4 text-xl text-center text-[#222222] font-[600]'>
             Add to Wishlist
           </h2>
         </div>
         <hr className='h-[2px] bg-slate-100' />
-        <div className='no-scrollbar h-[calc(90vh-170px)]  py-4 overflow-y-auto px-4 sm:px-8 grid items-start grid-cols-2 xl:grid-cols-3 gap-4'>
+        <div className='no-scrollbar max-h-[calc(90svh-170px)]  py-4 overflow-y-auto px-4 sm:px-8 grid items-start grid-cols-2 xl:grid-cols-3 gap-4'>
           {wishlists.map((wishlist) => (
             <button
               aria-label='add favourite to wishlist'
