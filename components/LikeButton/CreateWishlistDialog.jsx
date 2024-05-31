@@ -44,9 +44,6 @@ export function CreateWishlistDialog({ asButton, favouriteInfo }) {
       position: 'bottom-left',
     });
   };
-
-  // console.log('Create wishlist dialog: ', favouriteInfo);
-
   return (
     <>
       <Dialog open={open} onOpenChange={handleToogleModal}>
@@ -58,7 +55,11 @@ export function CreateWishlistDialog({ asButton, favouriteInfo }) {
               Create new wishlist
             </Button>
           ) : (
-            <LikeButton setOpen={setOpen} favourite={false} />
+            <LikeButton
+              setOpen={setOpen}
+              favourite={false}
+              roomID={favouriteInfo.id}
+            />
           )}
         </DialogTrigger>
         <DialogContent className='w-[90%] rounded-lg sm:max-w-[740px] p-0'>

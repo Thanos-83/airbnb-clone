@@ -65,14 +65,12 @@ export function WishlistsDialog({ info, wishlists }) {
 
   return (
     <Dialog open={openWishlists} onOpenChange={handleToogleModal}>
-      {/* <DialogTrigger asChild> */}
       <LikeButton setOpen={setWishlistsOpen} favourite={false} roomID={info.id}>
         {pathname === `/rooms/${info.id}` && (
           <span className='hidden md:inline-block'>Save</span>
         )}
       </LikeButton>
 
-      {/* </DialogTrigger> */}
       <DialogContent className='w-[90%] block rounded-lg wishlists_content sm:max-w-[740px] overflow-y-auto p-0'>
         <div>
           <h2 className='p-4 text-xl text-center text-[#222222] font-[600]'>

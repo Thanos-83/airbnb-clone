@@ -79,12 +79,13 @@ async function SingleRoom({ params }) {
             <FaAngleLeft className='w-4 h-4' />
             <span>Homes</span>
           </Link>
-          <div className='flex items-center '>
-            <button className='rounded-full md:rounded-xl font-semibold underline flex items-center gap-3 hover:bg-[#f7f7f7] p-3'>
+          <div className='flex gap-2 items-center '>
+            <button
+              className='rounded-full md:rounded-xl font-semibold underline flex items-center gap-3 hover:bg-[#f7f7f7] p-3'
+              aria-label='add favourite to wishlist'>
               <PiUploadSimpleBold className='h-5 w-5' />
               <span className='hidden md:inline'>Share</span>
             </button>
-            {/* {session && ( */}
             <FavouriteButton
               favourite={
                 userFavourites
@@ -97,7 +98,6 @@ async function SingleRoom({ params }) {
               wishlists={wishlists ? wishlists.wishlists : []}
               favouriteInfo={favouriteInfo}
             />
-            {/* )} */}
           </div>
         </div>
       </Container>

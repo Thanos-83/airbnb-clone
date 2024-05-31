@@ -30,7 +30,7 @@ export function ReviewsDialogMobile({ reviewScores, reviews, isMobile }) {
           Show all {reviews.length} reviews
         </button>
       </DrawerTrigger>
-      <DrawerContent className='h-[90vh] p-0 overflow-hidden'>
+      <DrawerContent className='h-[90svh] p-0 overflow-hidden'>
         <div className='flex flex-col gap-3 flex-1 px-6 py-6 '>
           <ScrollArea className='reviews_drawer_scores w-80vw'>
             <Ratings inDialog={true} reviewScores={reviewScores} />

@@ -65,7 +65,11 @@ export function DeleteWishlistDialog({ wishlistInfo }) {
               }`}
               type='submit'
               disabled={isPending}>
-              {isPending ? <Loader2 /> : 'Delete'}
+              {isPending ? (
+                <Loader2 className='h-4 w-4 animate-spin' />
+              ) : (
+                'Delete'
+              )}
             </Button>
           </div>
         </DialogContent>

@@ -136,7 +136,11 @@ export function RenameWishlistDialog({ setSettingsOpen, wishlistInfo }) {
                 disabled={
                   isSubmitting || wishlistName === wishlistInfo.wishlistName
                 }>
-                {isSubmitting ? <Loader2 /> : 'Save'}
+                {isSubmitting ? (
+                  <Loader2 className=' h-4 w-4 animate-spin' />
+                ) : (
+                  'Save'
+                )}
               </Button>
             </div>
           </form>
