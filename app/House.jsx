@@ -1,11 +1,15 @@
 'use client';
+import LoginFormModal from '@/components/Auth/LoginFormModal';
 import { CreateWishlistDialog } from '@/components/LikeButton/CreateWishlistDialog';
 import LikeButton from '@/components/LikeButton/LikeButton';
 import { WishlistsDialog } from '@/components/LikeButton/WishlistsDialog';
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 
 function House({ house, wishlists, isFavourite, favourite }) {
+  const session = useSession();
+
   // console.log('Is house favourite: ', isFavourite);
   const favouriteInfo = {
     id: house._id.toString(),
@@ -38,7 +42,9 @@ function House({ house, wishlists, isFavourite, favourite }) {
             Guest favourite
           </p>
         </Link>
-        {isFavourite ? (
+        {!session?.data ? (
+          <LoginFormModal label='' />
+        ) : isFavourite ? (
           <LikeButton
             favourite={true}
             wishlistID={favourite.wishlist_id}

@@ -14,14 +14,21 @@ import { AiOutlineMenu } from 'react-icons/ai';
 
 import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
+import LoginFormModal from './LoginFormModal';
 
 export function LoginModal({ session }) {
   // const session = useSession()
   // console.log('Session from LoginModal: ', session);
+  const [open, setOpen] = useState(false);
+  //  const [nameLength, setNameLength] = useState(0);
+  //  const pathname = usePathname();
+  const handleToogleModal = () => {
+    setOpen(!open);
+  };
 
   return (
     <div>
-      <DropdownMenu>
+      <DropdownMenu open={open} onOpenChange={handleToogleModal}>
         <DropdownMenuTrigger className='outline-none border rounded-full shadow-none hover:shadow-lg transition'>
           <div className='flex items-center gap-4  px-4 pr-2 py-2'>
             <AiOutlineMenu />
@@ -62,12 +69,17 @@ export function LoginModal({ session }) {
             </>
           ) : (
             <>
-              <DropdownMenuItem asChild className='px-3 pb-4 w-full text-lg'>
-                <Link href='/auth/signin'>Login</Link>
+              <DropdownMenuItem
+                asChild
+                className='px-3 pb-2 w-full text-lg cursor-pointer'>
+                {/* <Link href='/auth/signin'>Login</Link> */}
+                <LoginFormModal inDropdown={true} label='Login' />
               </DropdownMenuItem>
-              <DropdownMenuItem asChild className='px-3 pb-4 w-full text-lg'>
+              <DropdownMenuItem
+                asChild
+                className='px-3 pb-2 w-full text-lg cursor-pointer'>
                 <Link
-                  className='pointer-events-none cursor-not-allowed'
+                  className='pointer-events-none text-gray-300 cursor-not-allowed'
                   href='/auth/signup'>
                   Register
                 </Link>

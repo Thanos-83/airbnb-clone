@@ -8,8 +8,11 @@ import { EditNote } from './EditNote';
 import LikeButton from '@/components/LikeButton/LikeButton';
 import EditNoteMobile from './EditNoteMobile';
 import AddNoteMobile from './AddNoteMobile';
+import { useSession } from 'next-auth/react';
+import LoginFormModal from '@/components/Auth/LoginFormModal';
 
 function WishlistItem({ house, wishlist }) {
+  const session = useSession();
   return (
     <div className='flex flex-col '>
       <div className='flex-1'>
@@ -26,11 +29,15 @@ function WishlistItem({ house, wishlist }) {
               Guest favourite
             </p>
           </Link>
-          <LikeButton
-            favourite={true}
-            wishlistID={wishlist._id.toString()}
-            roomID={house.id.toString()}
-          />
+          {!session?.data ? (
+            <LoginFormModal label='' />
+          ) : (
+            <LikeButton
+              favourite={true}
+              wishlistID={wishlist._id.toString()}
+              roomID={house.id.toString()}
+            />
+          )}
         </div>
         <div className='mt-4'>
           <div className='flex items-center justify-between'>

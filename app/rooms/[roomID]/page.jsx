@@ -27,6 +27,7 @@ import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import BookingWindow from './BookingWindow';
 import { fetchReservations } from '@/app/_actions/actions';
 import ImagesCarousel from './ImagesCarousel';
+import LoginFormModal from '@/components/Auth/LoginFormModal';
 
 export async function generateMetadata({ params }) {
   console.log('Metada params: ', params);
@@ -41,7 +42,7 @@ export async function generateMetadata({ params }) {
 async function SingleRoom({ params }) {
   const session = await getServerSession(authOptions);
 
-  // console.log('Server Session: ', session);
+  console.log('Server Session: ', session);
 
   const roomInfo = await fetchSingleRoom(params.roomID);
   // console.log('Single Room Info: ', roomInfo);
@@ -86,18 +87,22 @@ async function SingleRoom({ params }) {
               <PiUploadSimpleBold className='h-5 w-5' />
               <span className='hidden md:inline'>Share</span>
             </button>
-            <FavouriteButton
-              favourite={
-                userFavourites
-                  ? userFavourites.favourites.find(
-                      (favourite) => favourite.id === params.roomID
-                    )
-                  : null
-              }
-              roomID={params.roomID}
-              wishlists={wishlists ? wishlists.wishlists : []}
-              favouriteInfo={favouriteInfo}
-            />
+            {!session ? (
+              <LoginFormModal label='Save' />
+            ) : (
+              <FavouriteButton
+                favourite={
+                  userFavourites
+                    ? userFavourites.favourites.find(
+                        (favourite) => favourite.id === params.roomID
+                      )
+                    : null
+                }
+                roomID={params.roomID}
+                wishlists={wishlists ? wishlists.wishlists : []}
+                favouriteInfo={favouriteInfo}
+              />
+            )}
           </div>
         </div>
       </Container>

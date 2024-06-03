@@ -3,6 +3,7 @@
 import { useSession } from 'next-auth/react';
 import { useRouter, usePathname } from 'next/navigation';
 import { removeFavourite } from '@/app/_actions/actions';
+import LoginFormModal from '../Auth/LoginFormModal';
 
 function LikeButton({ children, setOpen, favourite, wishlistID, roomID }) {
   const session = useSession();
@@ -11,7 +12,8 @@ function LikeButton({ children, setOpen, favourite, wishlistID, roomID }) {
 
   const handleFavourite = () => {
     if (!session.data) {
-      return router.push(`/auth/signin`);
+      // return router.push(`/auth/signin`);
+      // return <LoginFormModal />;
     }
     if (!favourite) {
       setOpen(true);
@@ -47,6 +49,7 @@ function LikeButton({ children, setOpen, favourite, wishlistID, roomID }) {
       </button>
     );
   }
+
   return (
     <button
       aria-label='add favourite to wishlist'

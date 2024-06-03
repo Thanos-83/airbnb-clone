@@ -134,6 +134,14 @@ body {
   }
 }
 
+@media screen and (min-width: 1024px) {
+  .roomImages {
+    height: calc(100svh - 200px);
+    min-height: 400px;
+    max-height: calc(100svh - 500px);
+  }
+}
+
 .roomImages_container > img {
   object-fit: inherit;
 }
