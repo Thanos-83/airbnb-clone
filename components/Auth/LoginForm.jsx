@@ -25,9 +25,15 @@ function LoginForm() {
     reset();
   };
   return (
-    <div>
+    <div className='max-h-[calc(90svh-90px)] overflow-y-auto'>
+      <div>
+        <h2 className='text-xl text-center font-bold mt-2 text-black'>
+          Welcome to Airbnb
+        </h2>
+        <p className='my-2 text-center'>Here you can login to your account!</p>
+      </div>
       <form onSubmit={handleSubmit(handleLogin)}>
-        <div className='space-y-6 py-4'>
+        <div className='space-y-6 py-4 px-1'>
           <div className='flex flex-col items-start gap-2'>
             <Label htmlFor='email' className='sr-only' />
             <Input
@@ -61,7 +67,7 @@ function LoginForm() {
           OR
         </p>
       </div>
-      <div className='space-y-4'>
+      <div className='space-y-4 '>
         <Button
           onClick={() => signIn('facebook')}
           className='w-full flex items-center py-6 font-bold text-lg'

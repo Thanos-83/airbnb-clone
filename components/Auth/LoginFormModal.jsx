@@ -31,10 +31,13 @@ function LoginFormModal({ inDropdown, label }) {
         <button
           aria-label='add favourite to wishlist'
           className={`${
-            !pathname.split('/').includes('rooms')
+            !pathname.split('/').includes('rooms') && !inDropdown
               ? 'absolute top-3 right-4'
-              : 'flex  items-center w-full gap-3 rounded-full md:rounded-xl   hover:bg-[#f7f7f7] p-3'
-          } ${!inDropdown && 'font-semibold underline'}`}>
+              : 'flex  items-center w-full gap-3 hover:bg-[#f1f5f9] p-3'
+          } ${
+            !inDropdown &&
+            'rounded-full md:rounded-xl    font-semibold underline'
+          }`}>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
@@ -52,24 +55,18 @@ function LoginFormModal({ inDropdown, label }) {
               d='M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z'
             />
           </svg>
-          <span className='hidden md:inline'>{label}</span>
+          <span className={`${!inDropdown && 'hidden md:inline'}`}>
+            {label}
+          </span>
         </button>
       </DialogTrigger>
 
-      <DialogContent className='sm:max-w-xl'>
+      <DialogContent className='max-h-[90%] rounded-xl w-[90%] sm:w-[80%] md:max-w-xl'>
         <DialogHeader>
           <DialogTitle className='text-center pb-4 font-bold text-lg'>
             Login
           </DialogTitle>
           <DropdownMenuSeparator className='bg-[#dddddd]' />
-          <DialogDescription asChild className='mt-2'>
-            <div>
-              <h2 className='text-xl font-bold mt-2 text-black'>
-                Welcome to Airbnb
-              </h2>
-              <p className='my-2'>Here you can login to your account!</p>
-            </div>
-          </DialogDescription>
         </DialogHeader>
         <SignInForm />
       </DialogContent>
